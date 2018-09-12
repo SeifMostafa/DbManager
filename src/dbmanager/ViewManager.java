@@ -645,6 +645,7 @@ public class ViewManager extends javax.swing.JFrame {
 
         // System.out.println("Hello from ViewManager, searchPanel calls me!! what do u
         // want ?! gvme data to search plz");
+        ArrayList<String> operators = new ArrayList<>();
         ArrayList<colPanel> where_colPanels = ((SearchPanel) jPanel_operation).getColPanels();
         ArrayList<JCheckBox> get_colPanels = ((SearchPanel) jPanel_operation).getCheckBox_col2get();
         DbTable selected_table = ((SearchPanel) jPanel_operation).getSelectedTable();
@@ -671,6 +672,7 @@ public class ViewManager extends javax.swing.JFrame {
                 where_cols.add(selected_table.getCols().get(i).getName());
                 where_values.add(new SimpleEntry<>(where_colPanels.get(i).getjTextField_colvalue().getText(),
                         selected_table.getCols().get(i).getType()));
+                operators.add(where_colPanels.get(i).getjComboBox_STATIC_OPERATORS().getSelectedItem().toString());
             }
         }
         String errorMsg = Messages.getString("ViewManager.empty_string");
@@ -689,7 +691,7 @@ public class ViewManager extends javax.swing.JFrame {
 
             }
             ArrayList<ArrayList<SimpleEntry<String, String>>> search_content = this.controller.search(selected_table,
-                    cols_to_get, where_cols, where_values, or);
+                    cols_to_get, where_cols, where_values, operators, or);
             if (search_content != null && search_content.size() > 0) {
                 String[] cols = new String[search_content.get(0).size()];
                 String[][] rows = new String[search_content.size()][search_content.get(0).size()];
@@ -728,7 +730,7 @@ public class ViewManager extends javax.swing.JFrame {
         ArrayList<colPanel> where_colPanels = ((UpdatePanel) jPanel_operation).getColPanels();
         ArrayList<colPanel> toUpdate_colPanels = ((UpdatePanel) jPanel_operation).getToUpdateColsPanels();
         final DbTable selected_table = ((UpdatePanel) jPanel_operation).getSelectedTable();
-
+        ArrayList<String> operators = new ArrayList<>();
         ArrayList<String> cols_to_update = new ArrayList<>();
         ArrayList<SimpleEntry<String, String>> update_values = new ArrayList<>();
 
@@ -745,6 +747,8 @@ public class ViewManager extends javax.swing.JFrame {
                 cols_to_update.add(selected_table.getCols().get(i).getName());
                 update_values.add(new SimpleEntry<>(toUpdate_colPanels.get(i).getjTextField_colvalue().getText(),
                         selected_table.getCols().get(i).getType()));
+                operators.add(where_colPanels.get(i).getjComboBox_STATIC_OPERATORS().getSelectedItem().toString());
+
             }
         }
         String Cond_where_multiple_cols = ((UpdatePanel) jPanel_operation).getCond_where_multiple_cols();
@@ -754,7 +758,7 @@ public class ViewManager extends javax.swing.JFrame {
 
         }
         boolean done = this.controller.cascadeUpdate(selected_table, cols_to_update, update_values,
-                where_cols, where_values, or);
+                where_cols, where_values, operators, or);
         // System.out.println(or);
 
         if (done) {
@@ -770,6 +774,7 @@ public class ViewManager extends javax.swing.JFrame {
         String report_message = Messages.getString("ViewManager.empty_string");
         ArrayList<String> tables_updated = new ArrayList<>();
         ArrayList<String> tables_not_updated = new ArrayList<>();
+        ArrayList<String> operators = new ArrayList<>();
         String Cond_where_multiple_cols = ((UpdatePanel) jPanel_operation).getCond_where_multiple_cols();
         final boolean or;
         if (Cond_where_multiple_cols.equals(Messages.getString("ViewManager.AND_where_multiple_col_cond"))) {
@@ -809,6 +814,8 @@ public class ViewManager extends javax.swing.JFrame {
                     update_values
                             .add(new SimpleEntry<>(toUpdate_colPanels.get(i).getjTextField_colvalue().getText(),
                                     selected_table.getCols().get(i).getType()));
+                    operators.add(where_colPanels.get(i).getjComboBox_STATIC_OPERATORS().getSelectedItem().toString());
+
                 }
             }
 
@@ -826,7 +833,7 @@ public class ViewManager extends javax.swing.JFrame {
             /// determine which case will go through
             if (!where_cols.isEmpty()) {
                 ArrayList<ArrayList<SimpleEntry<String, String>>> search_content = this.controller
-                        .search(selected_table, primaryKey_col_names, where_cols, where_values, or);
+                        .search(selected_table, primaryKey_col_names, where_cols, where_values, operators, or);
                 if (search_content != null) {
                     if (search_content.size() > 0) {
                         finishingUpdate = new Thread(new Runnable() {
@@ -864,7 +871,7 @@ public class ViewManager extends javax.swing.JFrame {
                                         c2u.add(R.col_name);
                                         StorageManager storageManager = new StorageManager();
                                         boolean done = controller.cascadeUpdate(storageManager.getDbTable(R.table_name), c2u,
-                                                primaryKey_col_newValue, c2u, primaryKey_col_oldValue, or);
+                                                primaryKey_col_newValue, c2u, primaryKey_col_oldValue, operators, or);
                                         if (done) {
                                             tables_updated.add(
                                                     R.table_name + Messages.getString("ViewManager.end_line"));
@@ -879,12 +886,12 @@ public class ViewManager extends javax.swing.JFrame {
 
                                     //  System.out.println("pk_old_v" + primaryKey_col_oldValue.size());
                                     //  System.out.println("pk_old_names" + primaryKey_col_names.size());
-                                    done1 = controller.delete(selected_table.getName(), primaryKey_col_names, primaryKey_col_oldValue, or);
+                                    done1 = controller.delete(selected_table.getName(), primaryKey_col_names, primaryKey_col_oldValue, operators, or);
                                     done2 = true;
                                 } else {
                                     //  System.out.println("notNewisExist");
                                     done2 = controller.cascadeUpdate(selected_table, cols_to_update, update_values,
-                                            primaryKey_col_names, primaryKey_col_oldValue, or);
+                                            primaryKey_col_names, primaryKey_col_oldValue, operators, or);
                                     done1 = true;
                                 }
                                 if (done1 && done2) {
@@ -902,7 +909,7 @@ public class ViewManager extends javax.swing.JFrame {
                                                     .add(new SimpleEntry<>(Messages.getString("ViewManager.active_col_set_to_n"),
                                                             Messages.getString("ViewManager.char_datatype")));
                                             if (controller.cascadeUpdate(selected_table, active_as_arraylist,
-                                                    active_no_as_updateValues, primaryKey_col_names, primaryKey_col_oldValue, or)) {
+                                                    active_no_as_updateValues, primaryKey_col_names, primaryKey_col_oldValue, operators, or)) {
                                                 active_no = true;
                                             }
                                             break;
@@ -942,7 +949,7 @@ public class ViewManager extends javax.swing.JFrame {
                             ArrayList<String> getallcols = new ArrayList<>();
                             getallcols.add(Messages.getString("Controller.select_all"));
                             search_content = this.controller
-                                    .search(selected_table, getallcols, where_cols, where_values, or);
+                                    .search(selected_table, getallcols, where_cols, where_values, operators, or);
 
                             cols = new String[selected_table.getCols().size()];
                             // prepare cols
@@ -1019,7 +1026,7 @@ public class ViewManager extends javax.swing.JFrame {
                                 ArrayList<String> getallcols = new ArrayList<>();
                                 getallcols.add(Messages.getString("Controller.select_all"));
                                 search_content = this.controller
-                                        .search(selected_table, getallcols, cols_to_update, update_values, or);
+                                        .search(selected_table, getallcols, cols_to_update, update_values, operators, or);
 
                                 String[][] new_data;
                                 String[] new_cols = new String[selected_table.getCols().size()];
@@ -1041,7 +1048,7 @@ public class ViewManager extends javax.swing.JFrame {
                                         getallcols = new ArrayList<>();
                                         getallcols.add(Messages.getString("Controller.select_all"));
                                         search_content = this.controller
-                                                .search(selected_table, getallcols, where_cols, where_values, or);
+                                                .search(selected_table, getallcols, where_cols, where_values, operators, or);
 
                                         cols = new String[selected_table.getCols().size()];
                                         // prepare cols
@@ -1107,7 +1114,7 @@ public class ViewManager extends javax.swing.JFrame {
                                 }
 
                                 search_content = this.controller.search(selected_table,
-                                        primaryKey_col_names, cols_to_update, update_values, or);
+                                        primaryKey_col_names, cols_to_update, update_values, operators, or);
 
                                 if (search_content != null) {
                                     if (search_content.size() > 0) {
@@ -1159,6 +1166,7 @@ public class ViewManager extends javax.swing.JFrame {
         ArrayList<colPanel> where_colPanels = ((SearchPanel) jPanel_operation).getColPanels();
         ArrayList<String> where_cols = new ArrayList<>();
         ArrayList<SimpleEntry<String, String>> where_values = new ArrayList<>();
+        ArrayList<String> operators = new ArrayList<>();
         if (selected_table != null) {
 
             ArrayList<String> primaryKey_col_names = new ArrayList<>();
@@ -1175,10 +1183,12 @@ public class ViewManager extends javax.swing.JFrame {
                     where_cols.add(selected_table.getCols().get(i).getName());
                     where_values.add(new SimpleEntry<>(where_colPanels.get(i).getjTextField_colvalue().getText(),
                             selected_table.getCols().get(i).getType()));
+                    operators.add(where_colPanels.get(i).getjComboBox_STATIC_OPERATORS().getSelectedItem().toString());
+
                 }
             }
             ArrayList<ArrayList<SimpleEntry<String, String>>> primary_values = controller.search(selected_table,
-                    primaryKey_col_names, where_cols, where_values, or);
+                    primaryKey_col_names, where_cols, where_values, operators, or);
             ArrayList<SimpleEntry<String, String>> primary_where_in_otherTables = new ArrayList<>();
             for (int i = 0; i < primary_values.size(); i++) {
                 for (int j = 0; j < primary_values.get(0).size(); j++) {
@@ -1238,7 +1248,7 @@ public class ViewManager extends javax.swing.JFrame {
                 if (((SearchPanel) jPanel_operation).getOtherTablesAppended() != null) {
                     ArrayList<ArrayList<SimpleEntry<String, String>>> result = controller.search(
                             ((SearchPanel) jPanel_operation).getOtherTablesAppended(), cols_to_search_inOtherTables,
-                            cols_to_search_inOtherTables, primary_where_in_otherTables, true);
+                            cols_to_search_inOtherTables, primary_where_in_otherTables, operators, true);
 
                     Boolean[] exists;
                     if (result != null) {
@@ -1465,21 +1475,24 @@ public class ViewManager extends javax.swing.JFrame {
 
         }
 
-        ArrayList<colPanel> Where_colPanels = ((DeletePanel) jPanel_operation).getColPanels();
+        ArrayList<colPanel> where_colPanels = ((DeletePanel) jPanel_operation).getColPanels();
         DbTable selected_table = ((DeletePanel) jPanel_operation).getSelectedTable();
 
         ArrayList<String> where_cols = new ArrayList<>();
         ArrayList<SimpleEntry<String, String>> where_values = new ArrayList<>();
+        ArrayList<String> operators = new ArrayList<>();
 
         for (int i = 0; i < selected_table.getCols().size(); i++) {
-            if (!Where_colPanels.get(i).getjTextField_colvalue().getText().isEmpty()) {
+            if (!where_colPanels.get(i).getjTextField_colvalue().getText().isEmpty()) {
                 where_cols.add(selected_table.getCols().get(i).getName());
-                where_values.add(new SimpleEntry<>(Where_colPanels.get(i).getjTextField_colvalue().getText(),
+                where_values.add(new SimpleEntry<>(where_colPanels.get(i).getjTextField_colvalue().getText(),
                         selected_table.getCols().get(i).getType()));
+                operators.add(where_colPanels.get(i).getjComboBox_STATIC_OPERATORS().getSelectedItem().toString());
+
             }
         }
 
-        boolean assurance = this.controller.delete(selected_table.getName(), where_cols, where_values, or);
+        boolean assurance = this.controller.delete(selected_table.getName(), where_cols, where_values, operators, or);
         if (assurance) {
             Utils.showCongrats(Messages.getString("ViewManager.done"));
 
@@ -1487,8 +1500,9 @@ public class ViewManager extends javax.swing.JFrame {
             Utils.showError("Cannot delete!");
         }
     }
+
     private void deleteAllActionPerformed() {
-      
+
         // System.out.println("Hello from ViewManager, deletePanel calls me!! what do u
         // want ?! gvme data to delete plz");
         String Cond_where_multiple_cols = ((DeletePanel) jPanel_operation).getCond_where_multiple_cols();
@@ -1497,21 +1511,24 @@ public class ViewManager extends javax.swing.JFrame {
             or = false;
         }
 
-        ArrayList<colPanel> Where_colPanels = ((DeletePanel) jPanel_operation).getColPanels();
+        ArrayList<colPanel> where_colPanels = ((DeletePanel) jPanel_operation).getColPanels();
         DbTable selected_table = ((DeletePanel) jPanel_operation).getSelectedTable();
 
         ArrayList<String> where_cols = new ArrayList<>();
         ArrayList<SimpleEntry<String, String>> where_values = new ArrayList<>();
+        ArrayList<String> operators = new ArrayList<>();
 
         for (int i = 0; i < selected_table.getCols().size(); i++) {
-            if (!Where_colPanels.get(i).getjTextField_colvalue().getText().isEmpty()) {
+            if (!where_colPanels.get(i).getjTextField_colvalue().getText().isEmpty()) {
                 where_cols.add(selected_table.getCols().get(i).getName());
-                where_values.add(new SimpleEntry<>(Where_colPanels.get(i).getjTextField_colvalue().getText(),
+                where_values.add(new SimpleEntry<>(where_colPanels.get(i).getjTextField_colvalue().getText(),
                         selected_table.getCols().get(i).getType()));
+                operators.add(where_colPanels.get(i).getjComboBox_STATIC_OPERATORS().getSelectedItem().toString());
+
             }
         }
 
-        boolean assurance = this.controller.cascadeDelete(selected_table, where_cols, where_values, or);
+        boolean assurance = this.controller.cascadeDelete(selected_table, where_cols, where_values,operators, or);
         if (assurance) {
             Utils.showCongrats(Messages.getString("ViewManager.done"));
 
@@ -1519,6 +1536,7 @@ public class ViewManager extends javax.swing.JFrame {
             Utils.showError("Cannot delete!");
         }
     }
+
     private void insertBtnActionPerformed() {
         // System.out.println("Hello from ViewManager, insertPanel calls me!! what do u
         // want ?! gvme data to insert plz");
@@ -1614,7 +1632,5 @@ public class ViewManager extends javax.swing.JFrame {
  private javax.swing.JButton jButton_updateALL;
     private javax.swing.JButton jButton_search_Others;
     private javax.swing.JButton jButton_deleteALL;
-
-
 
 }

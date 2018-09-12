@@ -34,7 +34,7 @@ public class Controller {
      */
     public boolean update(String table_name, ArrayList<String> cols_to_update,
             ArrayList<SimpleEntry<String, String>> new_values, ArrayList<String> where_cols,
-            ArrayList<SimpleEntry<String, String>> where_values, boolean or) {
+            ArrayList<SimpleEntry<String, String>> where_values, ArrayList<String>operator, boolean or) {
         boolean assurnceForcorrection = false;
         //System.out.println(or);
         if ((table_name == null ? Messages.getString("Controller.empty_string") != null : !table_name.equals(Messages.getString("Controller.empty_string"))) || table_name != null) { //$NON-NLS-1$
@@ -44,7 +44,7 @@ public class Controller {
                     && where_values.size() > 0) {
 
                 assurnceForcorrection = builder.buildUpdateQuery(table_name, cols_to_update, new_values, where_cols,
-                        where_values, or);
+                        where_values,operator, or);
                 if (assurnceForcorrection) {
 
                     SQLExecutor executor = new SQLExecutor(builder);
@@ -66,14 +66,14 @@ public class Controller {
                             if (table_name.equals(false_table_name)) {
                                 System.out.println("hello inv!");
 
-                                builder.buildSelectQuery(false_table_name, pk, where_cols, where_values, or);
+                                builder.buildSelectQuery(false_table_name, pk, where_cols, where_values,operator, or);
                                 ResultSet rs = executor.exe_select();
                                 rs.next();
                                 StorageManager storageManager = new StorageManager();
                                 ArrayList<SimpleEntry<String, String>> old_INVENTORY_ITEM_ID = new ArrayList<>();
                                 old_INVENTORY_ITEM_ID.add(new SimpleEntry<>(String.valueOf(rs.getLong(1)), "NUMBER"));
 
-                                builder.buildSelectQuery(false_table_name, pk, cols_to_update, new_values, or);
+                                builder.buildSelectQuery(false_table_name, pk, cols_to_update, new_values,operator, or);
                                 rs = executor.exe_select();
                                 rs.next();
                                 storageManager = new StorageManager();
@@ -90,14 +90,14 @@ public class Controller {
                                 }
                                 boolean update_childs = true;
                                 for (DbTable dbTable : tables_contain_inv_item_id) {
-                                    update_childs = update(dbTable.getName(), pk, new_INVENTORY_ITEM_ID, pk, old_INVENTORY_ITEM_ID, or);
+                                    update_childs = update(dbTable.getName(), pk, new_INVENTORY_ITEM_ID, pk, old_INVENTORY_ITEM_ID,operator, or);
                                     if (!update_childs) {
                                         break;
                                     }
                                 }
                                 boolean old_inv_item_delete = false;
                                 if (update_childs) {
-                                    old_inv_item_delete = delete(false_table_name, pk, old_INVENTORY_ITEM_ID, or);
+                                    old_inv_item_delete = delete(false_table_name, pk, old_INVENTORY_ITEM_ID,operator, or);
                                 }
                                 if (old_inv_item_delete) {
                                     System.out.println("done - cascade update!");
@@ -128,7 +128,7 @@ public class Controller {
 
     public boolean cascadeUpdate(DbTable table, ArrayList<String> cols_to_update,
             ArrayList<SimpleEntry<String, String>> new_values, ArrayList<String> where_cols,
-            ArrayList<SimpleEntry<String, String>> where_values, boolean or) {
+            ArrayList<SimpleEntry<String, String>> where_values,ArrayList<String>operator, boolean or) {
         boolean result = false;
         SQLBuilder builder = SQLBuilder.getInstance();
         SQLExecutor executor = new SQLExecutor(builder);
@@ -140,7 +140,7 @@ public class Controller {
         ArrayList<ref> refs = getRefinfo(table.name);
 
         ArrayList<SimpleEntry<String, String>> old_pks = new ArrayList<>();
-        builder.buildSelectQuery(table.name, pks, where_cols, where_values, or);
+        builder.buildSelectQuery(table.name, pks, where_cols, where_values,operator, or);
         ResultSet rs = executor.exe_select();
 
         try {
@@ -152,7 +152,7 @@ public class Controller {
         }
 
         ArrayList<SimpleEntry<String, String>> new_pks = new ArrayList<>();
-        builder.buildSelectQuery(table.name, pks, cols_to_update, new_values, or);
+        builder.buildSelectQuery(table.name, pks, cols_to_update, new_values,operator, or);
         rs = executor.exe_select();
         try {
             while (rs.next()) {
@@ -162,15 +162,15 @@ public class Controller {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        boolean assurance = updateChildTables(refs, pks, new_pks, old_pks, true);
+        boolean assurance = updateChildTables(refs, pks, new_pks, old_pks,operator, true);
         if (assurance) {
-            return builder.buildDeleteQuery(table.name, where_cols, where_values, or);
+            return builder.buildDeleteQuery(table.name, where_cols, where_values,operator, or);
         }
         return result;
     }
 
     public boolean cascadeDelete(DbTable table, ArrayList<String> where_cols,
-            ArrayList<SimpleEntry<String, String>> where_values, boolean or) {
+            ArrayList<SimpleEntry<String, String>> where_values,ArrayList<String>operator, boolean or) {
 
         boolean result = false;
         SQLBuilder builder = SQLBuilder.getInstance();
@@ -184,7 +184,7 @@ public class Controller {
         ArrayList<ref> refs = getRefinfo(table.name);
 
         ArrayList<SimpleEntry<String, String>> old_pks = new ArrayList<>();
-        builder.buildSelectQuery(table.name, pks, where_cols, where_values, or);
+        builder.buildSelectQuery(table.name, pks, where_cols, where_values,operator, or);
         ResultSet rs = executor.exe_select();
 
         try {
@@ -195,16 +195,16 @@ public class Controller {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        boolean assurance = deleteChilds(refs, old_pks, true);
+        boolean assurance = deleteChilds(refs, old_pks,operator, true);
         System.out.println("assure: " + assurance);
         if (assurance) {
-            builder.buildDeleteQuery(table.name, where_cols, where_values, or);
+            builder.buildDeleteQuery(table.name, where_cols, where_values,operator, or);
             return executor.exe_delete();
         }
         return result;
     }
 
-    private boolean deleteChildTables(ArrayList<ref> refs, ArrayList<String> pks, ArrayList<SimpleEntry<String, String>> old_pks, boolean or) {
+    private boolean deleteChildTables(ArrayList<ref> refs, ArrayList<String> pks, ArrayList<SimpleEntry<String, String>> old_pks,  ArrayList<String>operator, boolean or) {
         boolean isAllDeleted = true;
         SQLBuilder builder = SQLBuilder.getInstance();
         SQLExecutor executor = new SQLExecutor(builder);
@@ -212,7 +212,7 @@ public class Controller {
             try {
                 ArrayList<String> R_where_deleteCols = new ArrayList<>();
                 R_where_deleteCols.add(R.col_name);
-                builder.buildDeleteQuery(R.table_name, R_where_deleteCols, old_pks, or);
+                builder.buildDeleteQuery(R.table_name, R_where_deleteCols, old_pks,operator, or);
                 boolean done = executor.exe_delete();
                 ArrayList<ref> refs_ = getRefinfo(R.table_name);
                 if (refs_.size() > 0) {
@@ -228,7 +228,7 @@ public class Controller {
 
                     //ArrayList<ref> refs_ = getRefinfo(R.table_name);
                     ArrayList<SimpleEntry<String, String>> R_old_pks = new ArrayList<>();
-                    builder.buildSelectQuery(R.table_name, R_pks, pks, old_pks, or);
+                    builder.buildSelectQuery(R.table_name, R_pks, pks, old_pks,operator, or);
                     ResultSet rs = executor.exe_select();
                     if (rs != null) {
                         try {
@@ -241,7 +241,7 @@ public class Controller {
                     }
 
                     if (R_old_pks.size() > 0) {
-                        deleteChildTables(refs_, R_pks, R_old_pks, true);
+                        deleteChildTables(refs_, R_pks, R_old_pks,operator, true);
                     }
                 }
             } catch (Exception e) {
@@ -254,7 +254,7 @@ public class Controller {
                 ArrayList<ref> refs_ = getRefinfo(R.table_name);
 
                 ArrayList<SimpleEntry<String, String>> R_old_pks = new ArrayList<>();
-                builder.buildSelectQuery(R.table_name, R_pks, pks, old_pks, or);
+                builder.buildSelectQuery(R.table_name, R_pks, pks, old_pks,operator, or);
                 ResultSet rs = executor.exe_select();
                 if (rs != null) {
                     try {
@@ -267,14 +267,14 @@ public class Controller {
                 }
 
                 if (R_old_pks.size() > 0) {
-                    deleteChildTables(refs_, R_pks, R_old_pks, true);
+                    deleteChildTables(refs_, R_pks, R_old_pks, operator,true);
                 }
             }
         }
         return isAllDeleted;
     }
 
-    private boolean deleteChilds(ArrayList<ref> refs, ArrayList<SimpleEntry<String, String>> old_pks, boolean or) {
+    private boolean deleteChilds(ArrayList<ref> refs, ArrayList<SimpleEntry<String, String>> old_pks,  ArrayList<String>operator,boolean or) {
         boolean isAllDeleted = true;
         ArrayList<ref> ref_childs = new ArrayList<>();
         SQLBuilder builder = SQLBuilder.getInstance();
@@ -302,7 +302,7 @@ public class Controller {
 
                     R_old_pks_.add(new SimpleEntry<>(old_pks.get(0).getKey(), storageManager.getDbTable(R.table_name).getColType(R.col_name)));
 
-                    builder.buildSelectQuery(R.table_name, Rpks, old_pks_, R_old_pks_, or);
+                    builder.buildSelectQuery(R.table_name, Rpks, old_pks_, R_old_pks_,operator, or);
                     System.out.println("q: " + builder.query);
 
                     ResultSet rs = executor.exe_select();
@@ -320,10 +320,10 @@ public class Controller {
                         // recursive
                        // System.out.println("Hello");
 
-                        deleteChilds(R_refs, R_old_pks, or);
+                        deleteChilds(R_refs, R_old_pks,operator, or);
                     } else {
                         // exe 
-                        builder.buildDeleteQuery(R.table_name, old_pks_, R_old_pks_, or);
+                        builder.buildDeleteQuery(R.table_name, old_pks_, R_old_pks_,operator, or);
                         
                          System.out.println("q: (DELETE)" + builder.query);
                         
@@ -338,7 +338,7 @@ public class Controller {
         return isAllDeleted;
     }
 
-    private boolean updateChildTables(ArrayList<ref> refs, ArrayList<String> pks, ArrayList<SimpleEntry<String, String>> new_pks, ArrayList<SimpleEntry<String, String>> old_pks, boolean or) {
+    private boolean updateChildTables(ArrayList<ref> refs, ArrayList<String> pks, ArrayList<SimpleEntry<String, String>> new_pks, ArrayList<SimpleEntry<String, String>> old_pks, ArrayList<String>operator, boolean or) {
         boolean isAllUpdated = true;
         SQLBuilder builder = SQLBuilder.getInstance();
         SQLExecutor executor = new SQLExecutor(builder);
@@ -346,7 +346,7 @@ public class Controller {
             try {
                 ArrayList<String> R_update_cols = new ArrayList<>();
                 R_update_cols.add(R.col_name);
-                builder.buildUpdateQuery(R.table_name, R_update_cols, new_pks, R_update_cols, old_pks, or);
+                builder.buildUpdateQuery(R.table_name, R_update_cols, new_pks, R_update_cols, old_pks,operator, or);
                 boolean done = executor.exe_update();
                 if (!done) {
                     StorageManager storageManager = new StorageManager();
@@ -357,7 +357,7 @@ public class Controller {
                     ArrayList<ref> refs_ = getRefinfo(R.table_name);
 
                     ArrayList<SimpleEntry<String, String>> R_old_pks = new ArrayList<>();
-                    builder.buildSelectQuery(R.table_name, R_pks, pks, old_pks, or);
+                    builder.buildSelectQuery(R.table_name, R_pks, pks, old_pks,operator, or);
                     ResultSet rs = executor.exe_select();
                     if (rs != null) {
                         try {
@@ -370,7 +370,7 @@ public class Controller {
                     }
 
                     ArrayList<SimpleEntry<String, String>> R_new_pks = new ArrayList<>();
-                    builder.buildSelectQuery(R.table_name, R_pks, pks, new_pks, or);
+                    builder.buildSelectQuery(R.table_name, R_pks, pks, new_pks,operator, or);
                     rs = executor.exe_select();
                     if (rs != null) {
                         try {
@@ -382,7 +382,7 @@ public class Controller {
                         }
                     }
                     if (R_old_pks.size() > 0 && R_new_pks.size() > 0) {
-                        updateChildTables(refs_, R_pks, R_new_pks, R_old_pks, true);
+                        updateChildTables(refs_, R_pks, R_new_pks, R_old_pks,operator, true);
                     }
                 }
             } catch (Exception e) {
@@ -395,7 +395,7 @@ public class Controller {
                 ArrayList<ref> refs_ = getRefinfo(R.table_name);
 
                 ArrayList<SimpleEntry<String, String>> R_old_pks = new ArrayList<>();
-                builder.buildSelectQuery(R.table_name, R_pks, pks, old_pks, or);
+                builder.buildSelectQuery(R.table_name, R_pks, pks, old_pks,operator, or);
                 ResultSet rs = executor.exe_select();
                 if (rs != null) {
                     try {
@@ -408,7 +408,7 @@ public class Controller {
                 }
 
                 ArrayList<SimpleEntry<String, String>> R_new_pks = new ArrayList<>();
-                builder.buildSelectQuery(R.table_name, R_pks, pks, new_pks, or);
+                builder.buildSelectQuery(R.table_name, R_pks, pks, new_pks,operator, or);
                 rs = executor.exe_select();
                 if (rs != null) {
                     try {
@@ -420,7 +420,7 @@ public class Controller {
                     }
                 }
                 if (R_old_pks.size() > 0 && R_new_pks.size() > 0) {
-                    updateChildTables(refs_, R_pks, R_new_pks, R_old_pks, true);
+                    updateChildTables(refs_, R_pks, R_new_pks, R_old_pks,operator, true);
                 }
             }
         }
@@ -525,13 +525,13 @@ public class Controller {
 	 * process such as any animation, commit ..etc
      */
     public boolean delete(String table_name, ArrayList<String> where_cols,
-            ArrayList<SimpleEntry<String, String>> where_values, boolean or) {
+            ArrayList<SimpleEntry<String, String>> where_values, ArrayList<String>operator, boolean or) {
         boolean assurnceForcorrection = false;
         if ((table_name == null ? Messages.getString("Controller.empty_string") != null : !table_name.equals(Messages.getString("Controller.empty_string"))) || table_name != null) { //$NON-NLS-1$
             SQLBuilder builder = SQLBuilder.getInstance();
 
             if (where_cols.size() > 0 && where_values.size() > 0) {
-                assurnceForcorrection = builder.buildDeleteQuery(table_name, where_cols, where_values, or);
+                assurnceForcorrection = builder.buildDeleteQuery(table_name, where_cols, where_values,operator, or);
                 if (assurnceForcorrection) {
 
                     SQLExecutor executor = new SQLExecutor(builder);
@@ -562,7 +562,7 @@ public class Controller {
 	 * process such as any animation, commit ..etc
      */
     public ArrayList<ArrayList<SimpleEntry<String, String>>> search(DbTable table, ArrayList<String> cols_to_select,
-            ArrayList<String> where_cols, ArrayList<SimpleEntry<String, String>> where_values, boolean or) {
+            ArrayList<String> where_cols, ArrayList<SimpleEntry<String, String>> where_values, ArrayList<String>operator, boolean or) {
         if (table != null) {
             SQLBuilder builder = SQLBuilder.getInstance();
             ArrayList<String> cleaned_where_cols = new ArrayList<>();
@@ -583,7 +583,7 @@ public class Controller {
                 }
 
                 boolean assurnceForcorrection = builder.buildSelectQuery(table.getName(), cols_to_select,
-                        cleaned_where_cols, where_values, or);
+                        cleaned_where_cols, where_values,operator, or);
 
                 if (assurnceForcorrection) {
                     SQLExecutor executor = new SQLExecutor(builder);

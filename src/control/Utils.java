@@ -28,7 +28,7 @@ public class Utils {
     public final String USERDATA_FILEPATH = Messages.getString("Utils.USERDATA_FILEPATH"); //$NON-NLS-1$
     public final String TABLES_INFO_FILEPATH = Messages.getString("Utils.TABLES_INFO_FILEPATH"); //$NON-NLS-1$
     public final String APP_Config_FILEPATH = Messages.getString("Utils.APP_Config_FILEPATH"); //$NON-NLS-1$
-    public static final String[] STATIC_OPERATORS = new String[]{Messages.getString("Utils.equal"), Messages.getString("Utils.biggerThan"), Messages.getString("Utils.lessThan"), Messages.getString("Utils.notequal"), Messages.getString("Utils.biggerThanorEqual"), Messages.getString("Utils.lessThanOrEqual"), Messages.getString("Utils.contains")}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+    public static final String[] STATIC_OPERATORS = new String[]{Messages.getString("Utils.equal"), Messages.getString("Utils.biggerThan"), Messages.getString("Utils.lessThan"), Messages.getString("Utils.notequal"), Messages.getString("Utils.biggerThanorEqual"), Messages.getString("Utils.lessThanOrEqual"), Messages.getString("Utils.contains"),Messages.getString("Utils.like")}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
     public final int PASSWORD_LENGTH = 6;
 
     /*

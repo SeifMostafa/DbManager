@@ -141,6 +141,7 @@ public class SQLExecutor {
 
             mConnection = DriverManager.getConnection(DbManager.dbConfigs.DB_URL, DbManager.dbConfigs.USER_NAME, DbManager.dbConfigs.PASSWORD);
             Statement state = mConnection.createStatement();
+            System.out.println("select query: " + mBuilder.query);
             ResultSet resultset = state.executeQuery(mBuilder.query);
             if (resultset != null) {
                 return resultset;
