@@ -52,21 +52,21 @@ public class SQLBuilder {
         if (where_cols.size() > 0 && where_values.size() == where_cols.size()) {
             q += Messages.getString("SQLBuilder.where");
             for (int i = 0; i < where_cols.size() - 1; i++) {
-                q += where_cols.get(i) + operator.get(i)
+                q += where_cols.get(i) + " " + operator.get(i)
                         + getQforValue(where_values.get(i).getValue(), where_values.get(i).getKey())
                         + cond_where_multiple_cols;
             }
-            q += where_cols.get(where_cols.size() - 1) + operator.get(where_cols.size() - 1)
+            q += where_cols.get(where_cols.size() - 1) + " " + operator.get(where_cols.size() - 1)
                     + getQforValue(where_values.get(where_values.size() - 1).getValue(),
                             where_values.get(where_values.size() - 1).getKey());
         } else if (where_values.size() > where_cols.size()) {
             q += Messages.getString("SQLBuilder.where");
             for (int i = 0; i < where_values.size() - 1; i++) {
-                q += where_cols.get(0) + operator.get(0)
+                q += where_cols.get(0) + " " + operator.get(0)
                         + getQforValue(where_values.get(i).getValue(), where_values.get(i).getKey())
                         + cond_where_multiple_cols;
             }
-            q += where_cols.get(where_cols.size() - 1) + operator.get(where_cols.size() - 1)
+            q += where_cols.get(where_cols.size() - 1) + " " + operator.get(where_cols.size() - 1)
                     + getQforValue(where_values.get(where_values.size() - 1).getValue(),
                             where_values.get(where_values.size() - 1).getKey());
         } else {
@@ -122,11 +122,11 @@ public class SQLBuilder {
                 + Messages.getString("SQLBuilder.set");
         if (cols_to_update.size() > 0 && cols_to_update.size() <= new_values.size()) {
             for (int i = 0; i < cols_to_update.size() - 1; i++) {
-                q += cols_to_update.get(i) + operator.get(i)
+                q += cols_to_update.get(i) + " " + operator.get(i)
                         + getQforValue(new_values.get(i).getValue(), new_values.get(i).getKey())
                         + cond_where_multiple_cols;
             }
-            q += cols_to_update.get(cols_to_update.size() - 1) + operator.get(cols_to_update.size() - 1)
+            q += cols_to_update.get(cols_to_update.size() - 1) + " " + operator.get(cols_to_update.size() - 1)
                     + getQforValue(new_values.get(new_values.size() - 1).getValue(),
                             new_values.get(new_values.size() - 1).getKey());
         }
@@ -143,21 +143,21 @@ public class SQLBuilder {
         if (where_cols.size() > 0 && where_values.size() == where_cols.size()) {
             q += Messages.getString("SQLBuilder.where");
             for (int i = 0; i < where_cols.size() - 1; i++) {
-                q += where_cols.get(i) + operator.get(i)
+                q += where_cols.get(i) + " " + operator.get(i)
                         + getQforValue(where_values.get(i).getValue(), where_values.get(i).getKey())
                         + cond_where_multiple_cols;
             }
-            q += where_cols.get(where_cols.size() - 1) + operator.get(where_cols.size() - 1)
+            q += where_cols.get(where_cols.size() - 1) + " " + operator.get(where_cols.size() - 1)
                     + getQforValue(where_values.get(where_values.size() - 1).getValue(),
                             where_values.get(where_values.size() - 1).getKey());
         } else if (where_values.size() > where_cols.size()) {
             q += Messages.getString("SQLBuilder.where");
             for (int i = 0; i < where_values.size() - 1; i++) {
-                q += where_cols.get(0) + operator.get(i)
+                q += where_cols.get(0) + " " + operator.get(i)
                         + getQforValue(where_values.get(i).getValue(), where_values.get(i).getKey())
                         + cond_where_multiple_cols;
             }
-            q += where_cols.get(where_cols.size() - 1) + operator.get(where_cols.size() - 1)
+            q += where_cols.get(where_cols.size() - 1) + " " + operator.get(where_cols.size() - 1)
                     + getQforValue(where_values.get(where_values.size() - 1).getValue(),
                             where_values.get(where_values.size() - 1).getKey());
         } else {
@@ -182,21 +182,21 @@ public class SQLBuilder {
 
         if (where_cols.size() > 0 && where_values.size() == where_cols.size()) {
             for (int i = 0; i < where_cols.size() - 1; i++) {
-                q += where_cols.get(i) + operator.get(i)
+                q += where_cols.get(i) + " " + operator.get(i)
                         + getQforValue(where_values.get(i).getValue(), where_values.get(i).getKey())
                         + cond_where_multiple_cols;
             }
-            q += where_cols.get(where_cols.size() - 1)+ operator.get(where_cols.size() - 1)
+            q += where_cols.get(where_cols.size() - 1)+ " " + operator.get(where_cols.size() - 1)
                     + getQforValue(where_values.get(where_values.size() - 1).getValue(),
                             where_values.get(where_values.size() - 1).getKey());
         } else if (where_values.size() > where_cols.size()) {
 
             for (int i = 0; i < where_values.size() - 1; i++) {
-                q += where_cols.get(0)+ operator.get(0)
+                q += where_cols.get(0)+ " " + operator.get(0)
                         + getQforValue(where_values.get(i).getValue(), where_values.get(i).getKey())
                         + cond_where_multiple_cols;
             }
-            q += where_cols.get(where_cols.size() - 1) + operator.get(where_cols.size() - 1)
+            q += where_cols.get(where_cols.size() - 1) + " " + operator.get(where_cols.size() - 1)
                     + getQforValue(where_values.get(where_values.size() - 1).getValue(),
                             where_values.get(where_values.size() - 1).getKey());
         } else {

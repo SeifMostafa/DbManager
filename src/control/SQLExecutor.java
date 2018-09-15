@@ -32,6 +32,7 @@ public class SQLExecutor {
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SQLExecutor.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("ERROR DRIVER");
         }
 
     }
