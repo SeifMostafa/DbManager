@@ -5,6 +5,7 @@
  */
 package view;
 
+import control.Utils;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JPanel;
@@ -53,7 +54,7 @@ public class InsertPanel extends javax.swing.JPanel {
 
         for (int i = 0; i < mTables.size(); i++) {
             table_names[i] = mTables.get(i).getName();
-            if (mTables.get(i).getName().equals("CATALOG_ITEM")) {
+            if (mTables.get(i).getName().equals("MMC_SITE")) {
                 catalog_item_most_common_index = i;
             }
         }
@@ -147,20 +148,32 @@ public class InsertPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jComboBox_table_namesActionPerformed
     private void colSetup() {
-
         colPanels = new ArrayList<>();
         jPanel_colsPanel.removeAll();
-        for (int i = 0; i < selectedTable.getCols().size(); i++) {
-            colPanel colPanel = new colPanel(selectedTable.getCols().get(i).getName());
-            colPanel.setcomboBoxSignOperatorsVisibility(false);
-            colPanels.add(colPanel);
-            jPanel_colsPanel.add(colPanel);
-        }
+        if ((jComboBox_table_names.getSelectedItem().toString()).equals("MMC_SITE") || (jComboBox_table_names.getSelectedItem().toString()).equals("FIELD_UNIT")) {
+            if ((jComboBox_table_names.getSelectedItem().toString()).equals("MMC_SITE")) {
+                colPanels = Utils.handleEasyInsertionMMC_SITE(selectedTable.getCols());
+                for (int i = 0; i < selectedTable.getCols().size(); i++) {
+                    jPanel_colsPanel.add(colPanels.get(i));
+                }
+            } else {
+                colPanels = Utils.handleEasyInsertionFIELD_UNIT(selectedTable.getCols());
+                for (int i = 0; i < selectedTable.getCols().size(); i++) {
+                    jPanel_colsPanel.add(colPanels.get(i));
+                }
+            }
 
+        } else {
+            for (int i = 0; i < selectedTable.getCols().size(); i++) {
+                colPanel colPanel = new colPanel(selectedTable.getCols().get(i).getName());
+                colPanel.setcomboBoxSignOperatorsVisibility(false);
+                colPanels.add(colPanel);
+                jPanel_colsPanel.add(colPanel);
+            }
+        }
         revalidate();
         repaint();
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox_table_names;
     private javax.swing.JLabel jLabel_data;

@@ -16,10 +16,10 @@ import javax.swing.JTextField;
 public class colPanel extends javax.swing.JPanel {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	/**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    /**
      * Creates new form colPanel
      */
     String colName;
@@ -95,6 +95,10 @@ public class colPanel extends javax.swing.JPanel {
 
     public JTextField getjTextField_colvalue() {
         return jTextField_colvalue;
+    }
+
+    public void setjTextField_colvalue(String jTextField_colvalue) {
+        this.jTextField_colvalue.setText(jTextField_colvalue);
     }
 
 }
