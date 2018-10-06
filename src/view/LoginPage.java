@@ -22,10 +22,10 @@ import model.User.PERMISSION;
 public class LoginPage extends javax.swing.JFrame {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	boolean firstTime;
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    boolean firstTime;
     boolean done = false;
 
     /**
@@ -174,7 +174,7 @@ public class LoginPage extends javax.swing.JFrame {
                     if (lic_code.equals(Messages.getString("LoginPage.55"))) { //$NON-NLS-1$
                         User user = new User(username, password);
                         user.setPermissions(new PERMISSION[]{PERMISSION.MASTER});
-                        
+
                         authManager.setUser(user);
 
                         storageManager.saveUserData(user);

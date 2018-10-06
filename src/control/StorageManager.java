@@ -15,15 +15,30 @@ import model.DbTable.dbCol;
 import model.User;
 import model.User.PERMISSION;
 
+/**
+ *
+ * @author dotnet2
+ */
 public class StorageManager {
 
     String filepath;
+
+    /**
+     *
+     */
     public static final int ENCRYPTION_PUB_KEY = 69;
 
     public StorageManager() {
         super();
     }
 
+    /**
+     *
+     * @param dbLabel database label to indicate which database to get its
+     * tables
+     * @return array of DbTable refers to tables are exist in database indicated
+     * by dbLabel
+     */
     public ArrayList<DbTable> getTables(String dbLabel) {
         ArrayList<DbTable> result = new ArrayList<>();
         try {
@@ -80,6 +95,12 @@ public class StorageManager {
         return result;
     }
 
+    /**
+     *
+     * @param chosenTableName to get database table
+     * @return DbTable object carry table name and table columns with their data
+     * types
+     */
     public DbTable getDbTable(String chosenTableName) {
         try {
             File file = new File(new Utils().TABLES_INFO_FILEPATH + "_" + dbmanager.DbManager.dbConfigs.getLabel() + ".bin");
@@ -139,6 +160,12 @@ public class StorageManager {
         return null;
     }
 
+    /**
+     *
+     * @param username opened tables for specific user
+     * @return array of database tables are opened for user indicated by given
+     * @param username
+     */
     public ArrayList<DbTable> getUserAccessedTables(String username) {
         ArrayList<DbTable> result = new ArrayList<>();
         try {
@@ -195,8 +222,13 @@ public class StorageManager {
         return result;
     }
 
-    /*
-	 * get tables contains cols(ArrayList<String> col_names)
+    /**
+     *
+     * @param col_names to get tables contains cols indicated by this col_names
+     * (column names)
+     * @param dbLabel to search under specific database indicated by this
+     * dbLabel
+     * @return array of database tables contains columns with the col_names
      */
     public ArrayList<DbTable> getTablesContain(ArrayList<String> col_names, String dbLabel) {
         ArrayList<DbTable> result = new ArrayList<>();
@@ -266,10 +298,12 @@ public class StorageManager {
         return result;
     }
 
-    /*
-	 * table_name[col_name$data_type$NotNull]table_name[] read line substring [ to ]
-	 * substring $ =>
-	 * 
+    /**
+     * table_name[col_name$data_type$NotNull]table_name[] read line substring [
+     * to ] substring $ =>
+     *
+     * @param dbTable to be written in database
+     * @param dbLabel to indicate database to write on.
      */
     public void appendTable(DbTable dbTable, String dbLabel) {
         File file = new File(new Utils().TABLES_INFO_FILEPATH + "_" + dbLabel + ".bin"); // set path from constants
@@ -289,6 +323,12 @@ public class StorageManager {
         }
     }
 
+    /**
+     *
+     * @param dbTable to add database table to a specific user
+     * @param username to indicate the user whose dbTable(database table) is
+     * opened.
+     */
     public void appendUserAccessedTable(DbTable dbTable, String username) {
         File file = new File(new Utils().USERDATA_FILEPATH + "_" + username + ".bin"); // set path from constants
         try {
@@ -307,6 +347,13 @@ public class StorageManager {
         }
     }
 
+    /**
+     *
+     * @param table_name to get database table
+     * @param dbLabel to indicate database
+     * @return true if database contains the table indicated by table_name,
+     * false otherwise.
+     */
     @SuppressWarnings("resource")
     public boolean checkifTableExist(String table_name, String dbLabel) {
 
@@ -340,8 +387,9 @@ public class StorageManager {
         return false;
     }
 
-    /*
-	 * write user
+    /**
+     *
+     * @param user to be written
      */
     public void saveUserData(User user) {
         File file = new File(new Utils().USERDATA_FILEPATH + ".bin"); // set path from constants
@@ -381,8 +429,9 @@ public class StorageManager {
         }
     }
 
-    /*
-	 * delete user
+    /**
+     *
+     * @param user to be deleted
      */
     public void deleteUser(User user) {
         ArrayList<User> users = this.getUsers();
@@ -418,8 +467,10 @@ public class StorageManager {
         }
     }
 
-    /*
-	 * get registered/added users
+    /**
+     * get registered/added users
+     *
+     * @return array of users are registered
      */
     public ArrayList<User> getUsers() {
         ArrayList<User> result = new ArrayList<User>();
@@ -462,15 +513,16 @@ public class StorageManager {
                     }
                 }
                 User user = new User(user_name, password);
+
                 user.setPermissions(permissions);
 
                 if (new File(new Utils().USERDATA_FILEPATH + "_" + user.getUsername() + ".bin").exists()) {
                     ArrayList<DbTable> accessed_tables = getUserAccessedTables(user_name);
                     user.setAccess_tables(accessed_tables);
                 }
+                System.out.println("User:" + user.getUsername() + " , " + user.getPassword());
                 result.add(user);
                 line = bufferedReader.readLine();
-
             }
             bufferedReader.close();
         } catch (FileNotFoundException e) {
@@ -481,8 +533,10 @@ public class StorageManager {
         return result;
     }
 
-    /*
-	 * read db configs
+    /**
+     * read db configs into main class schemas object
+     *
+     * @return true if read process is successfully done, false otherwise
      */
     public boolean ReadConfigurations() {
         ArrayList<DbConfigs> schemas = new ArrayList<>();
@@ -526,8 +580,11 @@ public class StorageManager {
         }
     }
 
-    /*
-	 * write db config.
+    /**
+     *
+     * @param configs database configuration (username/password@host:port/sid)
+     * to be written in cache files.
+     *
      */
     public void WriteConfigurations(DbConfigs configs) {
         File file = new File(new Utils().DB_CONFIG_FILEPATH + ".bin"); // set path from constants
@@ -545,8 +602,17 @@ public class StorageManager {
         }
     }
 
+    /**
+     * to encrypt text in cache files .. not used in this version
+     */
     public static class Encryptor {
 
+        /**
+         *
+         * @param password
+         * @param pk
+         * @return
+         */
         public static String encrypt(String password, int pk) {
             String encryptedPassword = "";
             encryptedPassword += String.valueOf(0 + new Random().nextInt(9 - 0 + 1));
@@ -577,8 +643,17 @@ public class StorageManager {
         }
     }
 
+    /**
+     * to decrypt text in cache files ..not used in this version
+     */
     public static class Decryptor {
 
+        /**
+         *
+         * @param encryptedPassword
+         * @param pk
+         * @return
+         */
         public static String decrypt(String encryptedPassword, int pk) {
             String password = "";
 

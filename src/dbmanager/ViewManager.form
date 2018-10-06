@@ -30,14 +30,6 @@
             <Property name="text" type="java.lang.String" value="User"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_userInfo">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="user info"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem_userInfoActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem_addUser">
               <Properties>
                 <Property name="text" type="java.lang.String" value="add user"/>

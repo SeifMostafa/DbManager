@@ -17,12 +17,27 @@ import view.LoginPage;
  */
 public class DbManager {
     
+    /**
+     *
+     */
     public static DbConfigs[] schemas;
     static Boolean readyToStart = false;
+
+    /**
+     *
+     */
     public static Semaphore semaphore_stopMAIN;
+
+    /**
+     *
+     */
     public static DbConfigs dbConfigs;
     private static DbManager dbManager;
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         
        try {
@@ -78,6 +93,12 @@ public class DbManager {
     /*
     get the object (instance)
      */
+
+    /**
+     *
+     * @return
+     */
+
     public static DbManager getInstance() {
         if (dbManager == null) {
             dbManager = new DbManager();

@@ -21,11 +21,11 @@ public class SQLExecutor {
     SQLBuilder mBuilder;
     Connection mConnection;
 
-    /*
-	 * returned boolean: get assurance that update is happened successfully
-	 * 
+    /**
+     * open database connection
+     *
      */
-    public void openConnection() throws SQLException {
+    public void openConnection() {
         try {
             Class.forName(DbManager.dbConfigs.DB_DRIVER_URL);
             mConnection = DriverManager.getConnection(DbManager.dbConfigs.DB_URL, DbManager.dbConfigs.USER_NAME, DbManager.dbConfigs.PASSWORD);
@@ -33,15 +33,26 @@ public class SQLExecutor {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SQLExecutor.class.getName()).log(Level.SEVERE, null, ex);
             System.err.println("ERROR DRIVER");
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLExecutor.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
+    /**
+     *
+     * @param builder to be set as SQLExecutor.mBuilder
+     */
     public SQLExecutor(SQLBuilder builder) {
         super();
         this.mBuilder = builder;
     }
 
+    /**
+     *
+     * @return true if insert statement is executed successfully, false
+     * otherwise
+     */
     public boolean exe_insert() {
         try {
 
@@ -62,6 +73,10 @@ public class SQLExecutor {
         }
     }
 
+    /**
+     *
+     * @return array list of tables
+     */
     public ArrayList<String> getTables() {
         ArrayList<String> tables = new ArrayList<>();
         try {
@@ -83,6 +98,13 @@ public class SQLExecutor {
         return tables;
     }
 
+    /**
+     *
+     * @param table_name to use ready made pl function which is available with
+     * specific java and oracle versions and not suitable for this version it is
+     * available from sqlplus.
+     * @return table_name , table columns and their datatypes
+     */
     public ResultSet exe_pl_desc(String table_name) {
         ResultSet table = null;
         try {
@@ -106,6 +128,12 @@ public class SQLExecutor {
         return table;
     }
 
+    /**
+     *
+     * @param table_name to be selected using database meta-data
+     * @return DbTable object that works with any database table to carry
+     * table_name, table columns and its data types.
+     */
     public DbTable getDbTable(String table_name) {
         DbTable dbTable = null;
         try {
@@ -136,6 +164,10 @@ public class SQLExecutor {
         return dbTable;
     }
 
+    /**
+     *
+     * @return the result set (the result) from executing select query
+     */
     public ResultSet exe_select() {
         try {
             Class.forName(DbManager.dbConfigs.DB_DRIVER_URL);
@@ -157,10 +189,14 @@ public class SQLExecutor {
         }
     }
 
-    //
+    /**
+     *
+     * @return true if executing an update query is done successfully, false
+     * otherwise
+     */
     public boolean exe_update() {
         try {
-            
+
             Class.forName(DbManager.dbConfigs.DB_DRIVER_URL);
             mConnection = DriverManager.getConnection(DbManager.dbConfigs.DB_URL, DbManager.dbConfigs.USER_NAME, DbManager.dbConfigs.PASSWORD);
             Statement state = mConnection.createStatement();
@@ -174,7 +210,12 @@ public class SQLExecutor {
         }
     }
 
-    // get assurance that delete is happened successfully
+    /**
+     * to get assurance that delete is happened successfully
+     *
+     * @return true if executing delete query is happened successfully, false
+     * otherwise
+     */
     public boolean exe_delete() {
         try {
             Class.forName(DbManager.dbConfigs.DB_DRIVER_URL);
@@ -190,18 +231,9 @@ public class SQLExecutor {
             return false;
         }
     }
-    
-    
-    /*
-	 * public void exe_alter() { try { Class.forName(DbManager.dbConfigs.DB_DRIVER_URL);
-	 * mConnection = DriverManager.getConnection(DbManager.dbConfigs.DB_URL,
-	 * DbManager.dbConfigs.USER_NAME, DbManager.dbConfigs.PASSWORD); Statement state =
-	 * mConnection.createStatement(); state.execute(mBuilder.query);
-	 * mConnection.close(); }catch(Exception e) {
-	 * System.err.println("SQLEXE.exe_delete error: " + e.toString());
-	 * System.out.println(mBuilder.query);
-	 * 
-	 * } }
+
+    /**
+     * close database connection
      */
     public void closeConnection() {
         try {

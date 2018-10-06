@@ -1,42 +1,40 @@
 package control;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import model.DbTable;
-import oracle.net.aso.i;
+import view.MsgJFrame;
 import view.colPanel;
 
+/**
+ *
+ * @author dotnet2
+ */
 public class Utils {
 
     public enum SignOperator {
-        BIGGER, SMALLER, EQUAL
-    };
-    /*
-	 * // public static final delimiters public final String Delimiter_PORT_NUM =
-	 * "PORT"; public final String Delimiter_HOST = "HOST"; public final String
-	 * Delimiter_SERVICE = "SERVICE"; public final String Delimiter_DB_URL =
-	 * "DBURL"; public final String Delimiter_DB_DRIVER_URL = "DB_DRIVER_URL";
-	 * public final String Delimiter_DB_CONFIG_FILEPATH = ""; public final String
-	 * Delimiter_USERDATA_FILEPATH = ""; public final String
-	 * Delimiter_TABLES_INFO_FILEPATH = "";
-     */
 
-    // public app config paths
+        BIGGER,
+        SMALLER,
+        EQUAL
+    };
+    /**
+     * public app config paths
+     */
     public final String DB_CONFIG_FILEPATH = Messages.getString("Utils.DB_CONFIG_FILEPATH"); //$NON-NLS-1$
     public final String USERDATA_FILEPATH = Messages.getString("Utils.USERDATA_FILEPATH"); //$NON-NLS-1$
     public final String TABLES_INFO_FILEPATH = Messages.getString("Utils.TABLES_INFO_FILEPATH"); //$NON-NLS-1$
     public final String APP_Config_FILEPATH = Messages.getString("Utils.APP_Config_FILEPATH"); //$NON-NLS-1$
-    public static final String[] STATIC_OPERATORS = new String[]{Messages.getString("Utils.equal"), Messages.getString("Utils.biggerThan"), Messages.getString("Utils.lessThan"), Messages.getString("Utils.notequal"), Messages.getString("Utils.biggerThanorEqual"), Messages.getString("Utils.lessThanOrEqual"), Messages.getString("Utils.contains"), Messages.getString("Utils.like")}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+    public static final String[] STATIC_OPERATORS = new String[]{Messages.getString("Utils.equal"), Messages.getString("Utils.biggerThan"), Messages.getString("Utils.lessThan"), Messages.getString("Utils.notequal"), Messages.getString("Utils.biggerThanorEqual"), Messages.getString("Utils.lessThanOrEqual"), Messages.getString("Utils.contains"), Messages.getString("Utils.like")};
     public final int PASSWORD_LENGTH = 6;
 
-    /*
-	 *	check if s is totally number 
+    /**
+     *
+     * @param s check if s is totally number
+     * @return true if s is number, false otherwise
      */
     public static boolean isNum(String s) {
         for (int i = 0; i < s.length(); i++) // ascii for 0-9 : 48-57
@@ -48,20 +46,22 @@ public class Utils {
         return true;
     }
 
-    /*
-	 * check if string contains spaces
+    /**
+     *
+     * @param string to check if string contains spaces
+     * @return true if string contains spaces, false otherwise
      */
     public static boolean containSpaces(String string) {
-        if (string.contains(Messages.getString("Utils.space_string"))) //$NON-NLS-1$
-        {
-            return true;
-        } else {
-            return false;
-        }
+        return string.contains(Messages.getString("Utils.space_string")); //$NON-NLS-1$
     }
 
-    /*
-	 * check s length depending on operator and given length 
+    /**
+     * check s length depending on operator and given length
+     *
+     * @param s
+     * @param length
+     * @param operator
+     * @return
      */
     public static boolean checkLength(String s, int length, SignOperator operator) {
         switch (operator) {
@@ -91,7 +91,11 @@ public class Utils {
 
     }
 
-    // only "." address separator
+    /**
+     *
+     * @param host
+     * @return true if host string is host, false otherwise
+     */
     public boolean isHost(String host) {
         /*char dot_separator = '.';
 		int counter = 0;
@@ -106,6 +110,11 @@ public class Utils {
         return true;
     }
 
+    /**
+     *
+     * @param db_url to be checked
+     * @return true if db_url is database url, false otherwises
+     */
     public boolean iSDB_URL(String db_url) {
         if (db_url.contains(Messages.getString("Utils.at")) && db_url.contains(Messages.getString("Utils.colon"))) //$NON-NLS-1$ //$NON-NLS-2$
         {
@@ -125,39 +134,49 @@ public class Utils {
 		}
 		
 	}*/
+    /**
+     *
+     * @param message to be shown on JOptionPane
+     */
+    public static void showMessage(String message) {
+        MsgJFrame dialog = new MsgJFrame();
+        dialog.setTextjTextArea(message);
+        dialog.setLocation(500, 400);
+        dialog.setVisible(true);
+    }
+
+    /**
+     *
+     * @param message to be shown on JOptionPane as error
+     */
     public static void showError(String message) {
         JOptionPane.showOptionDialog(null, message, Messages.getString("Utils.err"), JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, new Object[]{}, null); //$NON-NLS-1$
     }
 
+    /**
+     *
+     * @param message to be shown on JOptionPane as info
+     */
     public static void showCongrats(String message) {
+
         JOptionPane.showOptionDialog(null, message, Messages.getString("Utils.info"), JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{}, null); //$NON-NLS-1$
 
     }
 
+    /**
+     *
+     * @param message to be shown on JOptionPane as warning
+     */
     public static void showWarning(String message) {
         JOptionPane.showOptionDialog(null, message, "Warning", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, new Object[]{}, null); //$NON-NLS-1$
 
     }
-//    public static String readFileIntoString(String filepath) {
-//    	String Return="";
-//    	try {
-//            FileReader fileReader = new FileReader(new File(filepath));
-//            BufferedReader bufferedReader = new BufferedReader(fileReader);
-//            String line = bufferedReader.readLine();
-//            while (line != null) {
-//            	Return+=line;
-//            	line = bufferedReader.readLine();
-//            }
-//            bufferedReader.close();
-//            return Return;
-//    	}catch(Exception e) {
-//    		e.printStackTrace();
-//    		
-//    		return Messages.getString("ViewManager.help_string");
-//    	}
-//            
-//    }
 
+    /**
+     *
+     * @param textArea_done to be surronded by scroll
+     * @return textArea_done in JScrollPane
+     */
     public static JScrollPane getScrollforText(JTextArea textArea_done) {
         JScrollPane jScrollPane = new JScrollPane(textArea_done);
         jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -166,6 +185,12 @@ public class Utils {
         return jScrollPane;
     }
 
+    /**
+     *
+     * @param cols to indicate MMC_SITE cols
+     * @return array of colPanels contains default values to be inserted in
+     * MMC.MMC_SITE (MMC database table)
+     */
     public static ArrayList<colPanel> handleEasyInsertionMMC_SITE(ArrayList<DbTable.dbCol> cols) {
         ArrayList<colPanel> colPanels = new ArrayList<>();
         for (int i = 0; i < cols.size(); i++) {
@@ -223,7 +248,14 @@ public class Utils {
         }
         return colPanels;
     }
-        public static ArrayList<colPanel> handleEasyInsertionFIELD_UNIT(ArrayList<DbTable.dbCol> cols) {
+
+    /**
+     *
+     * @param cols to indicate FIELD_UNIT cols
+     * @return array of colPanels contains default values to be inserted in
+     * MMC.FIELD_UNIT (MMC database table)
+     */
+    public static ArrayList<colPanel> handleEasyInsertionFIELD_UNIT(ArrayList<DbTable.dbCol> cols) {
         ArrayList<colPanel> colPanels = new ArrayList<>();
         for (int i = 0; i < cols.size(); i++) {
             colPanel colPanel = new colPanel(cols.get(i).getName());

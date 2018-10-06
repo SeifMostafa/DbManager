@@ -163,7 +163,6 @@ public class ViewManager extends javax.swing.JFrame {
         jMenu_refresh_tables = new javax.swing.JMenu();
         jMenuItem_refreshTables = new javax.swing.JMenuItem();
         jMenu_user = new javax.swing.JMenu();
-        jMenuItem_userInfo = new javax.swing.JMenuItem();
         jMenuItem_addUser = new javax.swing.JMenuItem();
         jMenuItem_deleteUser = new javax.swing.JMenuItem();
         jMenuItem_logout = new javax.swing.JMenuItem();
@@ -270,14 +269,6 @@ public class ViewManager extends javax.swing.JFrame {
         jMenuBar1.add(jMenu_refresh_tables);
 
         jMenu_user.setText("User");
-
-        jMenuItem_userInfo.setText("user info");
-        jMenuItem_userInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_userInfoActionPerformed(evt);
-            }
-        });
-        jMenu_user.add(jMenuItem_userInfo);
 
         jMenuItem_addUser.setText("add user");
         jMenuItem_addUser.addActionListener(new java.awt.event.ActionListener() {
@@ -395,15 +386,15 @@ public class ViewManager extends javax.swing.JFrame {
 
     private void jRadioButton_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_insertActionPerformed
         opPanelSetup(new InsertPanel(tables));
-        if (jButton_updateALL != null) {
-            op_btnsPanels.remove(jButton_updateALL);
-        }
+//        if (jButton_updateALL != null) {
+//            op_btnsPanels.remove(jButton_updateALL);
+//        }
         if (jButton_search_Others != null) {
             op_btnsPanels.remove(jButton_search_Others);
         }
-        if (jButton_deleteALL != null) {
-            op_btnsPanels.remove(jButton_deleteALL);
-        }
+//        if (jButton_deleteALL != null) {
+//            op_btnsPanels.remove(jButton_deleteALL);
+//        }
         jButton_ok.setText(Messages.getString("ViewManager.insert"));
         jButton_ok.setVisible(true);
         for (ActionListener actionListener : jButton_ok.getActionListeners()) {
@@ -424,12 +415,12 @@ public class ViewManager extends javax.swing.JFrame {
             });
         }
         opPanelSetup(new SearchPanel(tables));
-        if (jButton_updateALL != null) {
-            op_btnsPanels.remove(jButton_updateALL);
-        }
-        if (jButton_deleteALL != null) {
-            op_btnsPanels.remove(jButton_deleteALL);
-        }
+//        if (jButton_updateALL != null) {
+//            op_btnsPanels.remove(jButton_updateALL);
+//        }
+//        if (jButton_deleteALL != null) {
+//            op_btnsPanels.remove(jButton_deleteALL);
+//        }
         jButton_ok.setText(Messages.getString("ViewManager.search"));
         jButton_ok.setVisible(true);
         for (ActionListener actionListener : jButton_ok.getActionListeners()) {
@@ -442,20 +433,20 @@ public class ViewManager extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton_searchActionPerformed
 
     private void jRadioButton_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_updateActionPerformed
-        if (jButton_updateALL == null) {
-            jButton_updateALL = new JButton(Messages.getString("ViewManager.update_all"));
-            jButton_updateALL.addActionListener((ActionEvent arg0) -> {
-                updateAllBtnActionPerformed();
-            });
-        }
+//        if (jButton_updateALL == null) {
+//            jButton_updateALL = new JButton(Messages.getString("ViewManager.update_all"));
+//            jButton_updateALL.addActionListener((ActionEvent arg0) -> {
+//                updateAllBtnActionPerformed();
+//            });
+//        }
 
         opPanelSetup(new UpdatePanel(tables));
         if (jButton_search_Others != null) {
             op_btnsPanels.remove(jButton_search_Others);
         }
-        if (jButton_deleteALL != null) {
-            op_btnsPanels.remove(jButton_deleteALL);
-        }
+//        if (jButton_deleteALL != null) {
+//            op_btnsPanels.remove(jButton_deleteALL);
+//        }
         jButton_ok.setText(Messages.getString("ViewManager.update"));
         jButton_ok.setVisible(true);
         for (ActionListener actionListener : jButton_ok.getActionListeners()) {
@@ -467,17 +458,17 @@ public class ViewManager extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton_updateActionPerformed
 
     private void jRadioButton_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_deleteActionPerformed
-        if (jButton_deleteALL == null) {
-            jButton_deleteALL = new JButton(Messages.getString("ViewManager.delete_all"));
-            jButton_deleteALL.addActionListener((ActionEvent arg0) -> {
-                deleteAllActionPerformed();
-            });
-        }
+//        if (jButton_deleteALL == null) {
+//            jButton_deleteALL = new JButton(Messages.getString("ViewManager.delete_all"));
+//            jButton_deleteALL.addActionListener((ActionEvent arg0) -> {
+//                deleteAllActionPerformed();
+//            });
+//        }
 
         opPanelSetup(new DeletePanel(tables));
-        if (jButton_updateALL != null) {
-            op_btnsPanels.remove(jButton_updateALL);
-        }
+//        if (jButton_updateALL != null) {
+//            op_btnsPanels.remove(jButton_updateALL);
+//        }
         if (jButton_search_Others != null) {
             op_btnsPanels.remove(jButton_search_Others);
         }
@@ -569,10 +560,6 @@ public class ViewManager extends javax.swing.JFrame {
                 Messages.getString("ViewManager.about"));
     }//GEN-LAST:event_jMenuItem_aboutActionPerformed
 
-    private void jMenuItem_userInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_userInfoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem_userInfoActionPerformed
-
     private void jMenuItem_refreshTablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_refreshTablesActionPerformed
         StorageManager storageManager = new StorageManager();
 
@@ -604,21 +591,19 @@ public class ViewManager extends javax.swing.JFrame {
 //                new Dimension(getToolkit().getScreenSize().width / 2, getToolkit().getScreenSize().height));
         jButton_ok.setText(Messages.getString("ViewManager.ok"));
 
-        if (jButton_updateALL != null) {
-            op_btnsPanels.remove(jButton_updateALL);
-            op_btnsPanels.add(jButton_updateALL);
-        }
-
+//        if (jButton_updateALL != null) {
+//            op_btnsPanels.remove(jButton_updateALL);
+//            op_btnsPanels.add(jButton_updateALL);
+//        }
         if (jButton_search_Others != null) {
             op_btnsPanels.remove(jButton_search_Others);
             op_btnsPanels.add(jButton_search_Others);
         }
 
-        if (jButton_deleteALL != null) {
-            op_btnsPanels.remove(jButton_deleteALL);
-            op_btnsPanels.add(jButton_deleteALL);
-        }
-
+//        if (jButton_deleteALL != null) {
+//            op_btnsPanels.remove(jButton_deleteALL);
+//            op_btnsPanels.add(jButton_deleteALL);
+//        }
         jPanel_variablePanel.add(jPanel_operation);
         op_btnsPanels.add(jButton_ok);
 
@@ -757,399 +742,398 @@ public class ViewManager extends javax.swing.JFrame {
             or = false;
 
         }
-        boolean done = this.controller.cascadeUpdate(selected_table, cols_to_update, update_values,
+        boolean done = this.controller.update(selected_table.name, cols_to_update, update_values,
                 where_cols, where_values, operators, or);
         // System.out.println(or);
 
         if (done) {
-            Utils.showCongrats(Messages.getString("ViewManager.done"));
+            Utils.showMessage(Messages.getString("ViewManager.done"));
         } else {
-            Utils.showError(Messages.getString("ViewManager.failed"));
+            Utils.showMessage(Messages.getString("ViewManager.failed"));
         }
     }
 
-    public void updateAllBtnActionPerformed() {
-
-        setNewisExist(false);
-        String report_message = Messages.getString("ViewManager.empty_string");
-        ArrayList<String> tables_updated = new ArrayList<>();
-        ArrayList<String> tables_not_updated = new ArrayList<>();
-        ArrayList<String> operators = new ArrayList<>();
-        String Cond_where_multiple_cols = ((UpdatePanel) jPanel_operation).getCond_where_multiple_cols();
-        final boolean or;
-        if (Cond_where_multiple_cols.equals(Messages.getString("ViewManager.AND_where_multiple_col_cond"))) {
-            or = false;
-        } else {
-            or = true;
-        }
-
-        ArrayList<colPanel> where_colPanels = ((UpdatePanel) jPanel_operation).getColPanels();
-        ArrayList<colPanel> toUpdate_colPanels = ((UpdatePanel) jPanel_operation).getToUpdateColsPanels();
-        DbTable selected_table = ((UpdatePanel) jPanel_operation).getSelectedTable();
-
-        final ArrayList<String> cols_to_update = new ArrayList<>();
-        final ArrayList<SimpleEntry<String, String>> update_values = new ArrayList<>();
-
-        final ArrayList<String> where_cols = new ArrayList<>();
-        final ArrayList<SimpleEntry<String, String>> where_values = new ArrayList<>();
-
-        final ArrayList<dbCol> primaryKey_col = new ArrayList<>();
-        final ArrayList<String> primaryKey_col_names = new ArrayList<>();
-
-        final ArrayList<SimpleEntry<String, String>> primaryKey_col_oldValue = new ArrayList<>();
-        final ArrayList<SimpleEntry<String, String>> primaryKey_col_newValue = new ArrayList<>();
-
-        if (selected_table.getCols().size() > 0) {
-            String[][] data = null;
-            String[] cols = new String[selected_table.getCols().size()];
-
-            for (int i = 0; i < selected_table.getCols().size(); i++) {
-                if (!where_colPanels.get(i).getjTextField_colvalue().getText().isEmpty()) {
-                    where_cols.add(selected_table.getCols().get(i).getName());
-                    where_values.add(new SimpleEntry<>(where_colPanels.get(i).getjTextField_colvalue().getText(),
-                            selected_table.getCols().get(i).getType()));
-                }
-                if (!toUpdate_colPanels.get(i).getjTextField_colvalue().getText().isEmpty()) {
-                    cols_to_update.add(selected_table.getCols().get(i).getName());
-                    update_values
-                            .add(new SimpleEntry<>(toUpdate_colPanels.get(i).getjTextField_colvalue().getText(),
-                                    selected_table.getCols().get(i).getType()));
-                    operators.add(where_colPanels.get(i).getjComboBox_STATIC_OPERATORS().getSelectedItem().toString());
-
-                }
-            }
-
-//            for (dbCol dbcol : selected_table.getCols()) {
-//                if (dbcol.isAcceptNull()) {
-//                    primaryKey_col.add(dbcol);
-//                    primaryKey_col_names.add(dbcol.getName());
-//                    break;
+//    public void updateAllBtnActionPerformed() {
+//
+//        setNewisExist(false);
+//        String report_message = Messages.getString("ViewManager.empty_string");
+//        ArrayList<String> tables_updated = new ArrayList<>();
+//        ArrayList<String> tables_not_updated = new ArrayList<>();
+//        ArrayList<String> operators = new ArrayList<>();
+//        String Cond_where_multiple_cols = ((UpdatePanel) jPanel_operation).getCond_where_multiple_cols();
+//        final boolean or;
+//        if (Cond_where_multiple_cols.equals(Messages.getString("ViewManager.AND_where_multiple_col_cond"))) {
+//            or = false;
+//        } else {
+//            or = true;
+//        }
+//
+//        ArrayList<colPanel> where_colPanels = ((UpdatePanel) jPanel_operation).getColPanels();
+//        ArrayList<colPanel> toUpdate_colPanels = ((UpdatePanel) jPanel_operation).getToUpdateColsPanels();
+//        DbTable selected_table = ((UpdatePanel) jPanel_operation).getSelectedTable();
+//
+//        final ArrayList<String> cols_to_update = new ArrayList<>();
+//        final ArrayList<SimpleEntry<String, String>> update_values = new ArrayList<>();
+//
+//        final ArrayList<String> where_cols = new ArrayList<>();
+//        final ArrayList<SimpleEntry<String, String>> where_values = new ArrayList<>();
+//
+//        final ArrayList<dbCol> primaryKey_col = new ArrayList<>();
+//        final ArrayList<String> primaryKey_col_names = new ArrayList<>();
+//
+//        final ArrayList<SimpleEntry<String, String>> primaryKey_col_oldValue = new ArrayList<>();
+//        final ArrayList<SimpleEntry<String, String>> primaryKey_col_newValue = new ArrayList<>();
+//
+//        if (selected_table.getCols().size() > 0) {
+//            String[][] data = null;
+//            String[] cols = new String[selected_table.getCols().size()];
+//
+//            for (int i = 0; i < selected_table.getCols().size(); i++) {
+//                if (!where_colPanels.get(i).getjTextField_colvalue().getText().isEmpty()) {
+//                    where_cols.add(selected_table.getCols().get(i).getName());
+//                    where_values.add(new SimpleEntry<>(where_colPanels.get(i).getjTextField_colvalue().getText(),
+//                            selected_table.getCols().get(i).getType()));
+//                }
+//                if (!toUpdate_colPanels.get(i).getjTextField_colvalue().getText().isEmpty()) {
+//                    cols_to_update.add(selected_table.getCols().get(i).getName());
+//                    update_values
+//                            .add(new SimpleEntry<>(toUpdate_colPanels.get(i).getjTextField_colvalue().getText(),
+//                                    selected_table.getCols().get(i).getType()));
+//                    operators.add(where_colPanels.get(i).getjComboBox_STATIC_OPERATORS().getSelectedItem().toString());
+//
 //                }
 //            }
-            String pk = controller.getPK(selected_table.name);
-            primaryKey_col_names.add(pk);
-            primaryKey_col.add(selected_table.getCol(pk));
-
-            /// determine which case will go through
-            if (!where_cols.isEmpty()) {
-                ArrayList<ArrayList<SimpleEntry<String, String>>> search_content = this.controller
-                        .search(selected_table, primaryKey_col_names, where_cols, where_values, operators, or);
-                if (search_content != null) {
-                    if (search_content.size() > 0) {
-                        finishingUpdate = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                final boolean done1, done2;
-
-                                if (newIsExist) {
-                                    ArrayList<ref> refs = controller.getRefinfo(selected_table.name);
-//                                    ArrayList<DbTable> tables_toUpdate = getTablesContain(primaryKey_col_names);
-//                                    if (tables_toUpdate.contains(selected_table)) {
-//                                        tables_toUpdate.remove(selected_table);
+//
+////            for (dbCol dbcol : selected_table.getCols()) {
+////                if (dbcol.isAcceptNull()) {
+////                    primaryKey_col.add(dbcol);
+////                    primaryKey_col_names.add(dbcol.getName());
+////                    break;
+////                }
+////            }
+//            String pk = controller.getPK(selected_table.name);
+//            primaryKey_col_names.add(pk);
+//            primaryKey_col.add(selected_table.getCol(pk));
+//
+//            /// determine which case will go through
+//            if (!where_cols.isEmpty()) {
+//                ArrayList<ArrayList<SimpleEntry<String, String>>> search_content = this.controller
+//                        .search(selected_table, primaryKey_col_names, where_cols, where_values, operators, or);
+//                if (search_content != null) {
+//                    if (search_content.size() > 0) {
+//                        finishingUpdate = new Thread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                final boolean done1, done2;
+//
+//                                if (newIsExist) {
+//                                    ArrayList<ref> refs = controller.getRefinfo(selected_table.name);
+////                                    ArrayList<DbTable> tables_toUpdate = getTablesContain(primaryKey_col_names);
+////                                    if (tables_toUpdate.contains(selected_table)) {
+////                                        tables_toUpdate.remove(selected_table);
+////                                    }
+////
+//                                    for (ref R : refs) {
+////                                        ArrayList<String> c2u = new ArrayList<>();
+////                                        for (String c : primaryKey_col_names) {
+////                                            for (dbCol c2 : dbTable.getCols()) {
+////                                                
+////                                                System.out.println("c"+c);
+////                                                System.out.println("c2"+c2.getName());
+////                                                
+////                                                if (c.contains(c2.getName())
+////                                                        || c2.getClass().toString().contains(c)) {
+////                                                    c2u.add(c2.getName());
+////                                                    break;
+////                                                }
+////                                            }
+////                                        }
+////                                        System.out.println(primaryKey_col_newValue.size());
+////                                        System.out.println(primaryKey_col_oldValue.size());
+////                                        System.out.println(c2u.size());
+////                                        
+//                                        ArrayList<String> c2u = new ArrayList<>();
+//                                        c2u.add(R.col_name);
+//                                        StorageManager storageManager = new StorageManager();
+//                                        boolean done = controller.cascadeUpdate(storageManager.getDbTable(R.table_name), c2u,
+//                                                primaryKey_col_newValue, c2u, primaryKey_col_oldValue, operators, or);
+//                                        if (done) {
+//                                            tables_updated.add(
+//                                                    R.table_name + Messages.getString("ViewManager.end_line"));
+//                                        } else {
+//                                            if (!R.table_name.contains("USLOG$")) {
+//                                                tables_not_updated.add(
+//                                                        R.table_name + Messages.getString("ViewManager.end_line"));
+//                                            }
+//
+//                                        }
 //                                    }
 //
-                                    for (ref R : refs) {
-//                                        ArrayList<String> c2u = new ArrayList<>();
-//                                        for (String c : primaryKey_col_names) {
-//                                            for (dbCol c2 : dbTable.getCols()) {
-//                                                
-//                                                System.out.println("c"+c);
-//                                                System.out.println("c2"+c2.getName());
-//                                                
-//                                                if (c.contains(c2.getName())
-//                                                        || c2.getClass().toString().contains(c)) {
-//                                                    c2u.add(c2.getName());
-//                                                    break;
+//                                    //  System.out.println("pk_old_v" + primaryKey_col_oldValue.size());
+//                                    //  System.out.println("pk_old_names" + primaryKey_col_names.size());
+//                                    done1 = controller.delete(selected_table.getName(), primaryKey_col_names, primaryKey_col_oldValue, operators, or);
+//                                    done2 = true;
+//                                } else {
+//                                    //  System.out.println("notNewisExist");
+//                                    done2 = controller.cascadeUpdate(selected_table, cols_to_update, update_values,
+//                                            primaryKey_col_names, primaryKey_col_oldValue, operators, or);
+//                                    done1 = true;
+//                                }
+//                                if (done1 && done2) {
+//                                    showReportMessage(tables_updated, tables_not_updated,
+//                                            Messages.getString("ViewManager.done_report_msg_record_not_exist") + report_message, true);
+//                                } else {
+//                                    // searching for active col to disable
+//                                    boolean active_no = false;
+//                                    for (dbCol col : selected_table.getCols()) {
+//                                        if (col.getName().equals(Messages.getString("ViewManager.active_col"))) {
+//                                            ArrayList<String> active_as_arraylist = new ArrayList<>();
+//                                            active_as_arraylist.add(Messages.getString("ViewManager.active_col"));
+//                                            ArrayList<SimpleEntry<String, String>> active_no_as_updateValues = new ArrayList<>();
+//                                            active_no_as_updateValues
+//                                                    .add(new SimpleEntry<>(Messages.getString("ViewManager.active_col_set_to_n"),
+//                                                            Messages.getString("ViewManager.char_datatype")));
+//                                            if (controller.cascadeUpdate(selected_table, active_as_arraylist,
+//                                                    active_no_as_updateValues, primaryKey_col_names, primaryKey_col_oldValue, operators, or)) {
+//                                                active_no = true;
+//                                            }
+//                                            break;
+//                                        }
+//                                    }
+//                                    if (active_no) {
+//                                        showReportMessage(tables_updated, tables_not_updated,
+//                                                Messages.getString("ViewManager.failed_report_msg_record") + report_message, true);
+//
+//                                    } else {
+//                                        showReportMessage(tables_updated, tables_not_updated,
+//                                                Messages.getString("ViewManager.failed_report_msg_record_update_active_to_no") + report_message,
+//                                                false);
+//                                    }
+//                                }
+//                            }
+//                        });
+//                        // System.out.println("Hello from content2");
+//                        try {
+//                            for (int r = 0; r < search_content.size(); r++) {
+//                                for (int i = 0; i < search_content.get(r).size(); i++) {
+//                                    for (dbCol col : primaryKey_col) {
+//                                        primaryKey_col_oldValue.add(
+//                                                new SimpleEntry<>(search_content.get(r).get(i).getValue(),
+//                                                        col.getType()));
+//                                    }
+//
+//                                }
+//                            }
+//                        } catch (Exception e) {
+//                            System.err.print(e.getMessage());
+//                        }
+//                        if (primaryKey_col_oldValue.size() > 1 && cols_to_update.isEmpty()) {
+//                            // case 2 :  fetch new data from where_values 
+//                            // show old with radio btns and get selected once closed with non -1 returned value
+//                            System.out.println("case2");
+//                            ArrayList<String> getallcols = new ArrayList<>();
+//                            getallcols.add(Messages.getString("Controller.select_all"));
+//                            search_content = this.controller
+//                                    .search(selected_table, getallcols, where_cols, where_values, operators, or);
+//
+//                            cols = new String[selected_table.getCols().size()];
+//                            // prepare cols
+//                            for (int j = 0; j < selected_table.getCols().size(); j++) {
+//                                cols[j] = selected_table.getCols().get(j).getName();
+//                            }
+//                            // prepare data
+//                            if (search_content != null) {
+//                                if (search_content.size() > 0) {
+//
+//                                    data = new String[search_content.size()][cols.length];
+//                                    for (int r = 0; r < search_content.size(); r++) {
+//                                        for (int i = 0; i < search_content.get(r).size(); i++) {
+//                                            data[r][i] = search_content.get(r).get(i).getValue();
+//                                        }
+//                                    }
+//                                    final String finalmData[][] = data;
+//                                    final String finalmCols[] = cols;
+//                                    //primaryKey_col_oldValue.clear();
+//                                    primaryKey_col_newValue.clear();
+//                                    new Thread(() -> {
+//                                        chooseRecordJDialog recordJDialog = new chooseRecordJDialog(finalmData, finalmCols);
+//                                        recordJDialog.setVisible(true);
+//
+//                                        recordJDialog.addWindowListener(new WindowAdapter() {
+//
+//                                            @Override
+//                                            public void windowClosed(WindowEvent e) {
+//                                                super.windowClosed(e);
+//                                                if (recordJDialog.getChoosenIndex() != -1) {
+//                                                    final int user_choice = recordJDialog.getChoosenIndex();
+//                                                    //    System.out.println("chosen: " + recordJDialog.getChoosenIndex());
+//
+//                                                    primaryKey_col.forEach((col) -> {
+//                                                        for (int j = 0; j < finalmCols.length; j++) {
+//                                                            if (col.getName().equals(finalmCols[j])) {
+//                                                                primaryKey_col_newValue.add(
+//                                                                        new SimpleEntry<>(finalmData[user_choice][j],
+//                                                                                col.getType()));
+//                                                            }
+//                                                        }
+//                                                    });
+//                                                    for (int r = 0; r < finalmData.length; r++) {
+//                                                        if (r != user_choice) {
+//                                                            for (final dbCol col : primaryKey_col) {
+//                                                                for (int j = 0; j < finalmCols.length; j++) {
+//                                                                    if (col.getName().equals(finalmCols[j])) {
+//                                                                        primaryKey_col_oldValue.add(
+//                                                                                new SimpleEntry<>(finalmData[r][j],
+//                                                                                        col.getType()));
+//                                                                    }
+//                                                                }
+//                                                            }
+//                                                        }
+//                                                    }
+//                                                    //System.out.println(primaryKey_col_newValue.size());
+//                                                    //System.out.println(primaryKey_col_oldValue.size());
+//                                                }
+//                                            }
+//                                        });
+//                                    }).start();
+//                                }
+//                            }
+//                        } else if (primaryKey_col_newValue.size() > 1 && !cols_to_update.isEmpty()) {
+//                            Utils.showWarning("cannot determine which is old because entered data is multiple!\nplz, update old first");
+//                        } else {
+//                            // case 1 : fetch data from cols_to_update and result set to get pk_new_values
+//                            // after get new data .. preview old record and new record (search result) ..
+//                            // show confirm msg to start looping and update all!
+//                            System.out.println("case1");
+//
+//                            if (!cols_to_update.isEmpty()) {
+//
+//                                ArrayList<String> getallcols = new ArrayList<>();
+//                                getallcols.add(Messages.getString("Controller.select_all"));
+//                                search_content = this.controller
+//                                        .search(selected_table, getallcols, cols_to_update, update_values, operators, or);
+//
+//                                String[][] new_data;
+//                                String[] new_cols = new String[selected_table.getCols().size()];
+//                                // prepare cols
+//                                for (int j = 0; j < selected_table.getCols().size(); j++) {
+//                                    new_cols[j] = selected_table.getCols().get(j).getName();
+//                                }
+//                                // prepare data
+//                                if (search_content != null) {
+//                                    if (search_content.size() > 0) {
+//
+//                                        new_data = new String[search_content.size()][new_cols.length];
+//                                        for (int r = 0; r < search_content.size(); r++) {
+//                                            for (int i = 0; i < search_content.get(r).size(); i++) {
+//                                                new_data[r][i] = search_content.get(r).get(i).getValue();
+//                                            }
+//                                        }
+//
+//                                        getallcols = new ArrayList<>();
+//                                        getallcols.add(Messages.getString("Controller.select_all"));
+//                                        search_content = this.controller
+//                                                .search(selected_table, getallcols, where_cols, where_values, operators, or);
+//
+//                                        cols = new String[selected_table.getCols().size()];
+//                                        // prepare cols
+//                                        for (int j = 0; j < selected_table.getCols().size(); j++) {
+//                                            cols[j] = selected_table.getCols().get(j).getName();
+//                                        }
+//                                        // prepare data
+//                                        if (search_content != null) {
+//                                            if (search_content.size() > 0) {
+//
+//                                                data = new String[search_content.size()][cols.length];
+//                                                for (int r = 0; r < search_content.size(); r++) {
+//                                                    for (int i = 0; i < search_content.get(r).size(); i++) {
+//                                                        //     System.out.println("hi: " + search_content.get(r).get(i).getValue());
+//                                                        data[r][i] = search_content.get(r).get(i).getValue();
+//                                                    }
 //                                                }
 //                                            }
 //                                        }
-//                                        System.out.println(primaryKey_col_newValue.size());
-//                                        System.out.println(primaryKey_col_oldValue.size());
-//                                        System.out.println(c2u.size());
-//                                        
-                                        ArrayList<String> c2u = new ArrayList<>();
-                                        c2u.add(R.col_name);
-                                        StorageManager storageManager = new StorageManager();
-                                        boolean done = controller.cascadeUpdate(storageManager.getDbTable(R.table_name), c2u,
-                                                primaryKey_col_newValue, c2u, primaryKey_col_oldValue, operators, or);
-                                        if (done) {
-                                            tables_updated.add(
-                                                    R.table_name + Messages.getString("ViewManager.end_line"));
-                                        } else {
-                                            if (!R.table_name.contains("USLOG$")) {
-                                                tables_not_updated.add(
-                                                        R.table_name + Messages.getString("ViewManager.end_line"));
-                                            }
-
-                                        }
-                                    }
-
-                                    //  System.out.println("pk_old_v" + primaryKey_col_oldValue.size());
-                                    //  System.out.println("pk_old_names" + primaryKey_col_names.size());
-                                    done1 = controller.delete(selected_table.getName(), primaryKey_col_names, primaryKey_col_oldValue, operators, or);
-                                    done2 = true;
-                                } else {
-                                    //  System.out.println("notNewisExist");
-                                    done2 = controller.cascadeUpdate(selected_table, cols_to_update, update_values,
-                                            primaryKey_col_names, primaryKey_col_oldValue, operators, or);
-                                    done1 = true;
-                                }
-                                if (done1 && done2) {
-                                    showReportMessage(tables_updated, tables_not_updated,
-                                            Messages.getString("ViewManager.done_report_msg_record_not_exist") + report_message, true);
-                                } else {
-                                    // searching for active col to disable
-                                    boolean active_no = false;
-                                    for (dbCol col : selected_table.getCols()) {
-                                        if (col.getName().equals(Messages.getString("ViewManager.active_col"))) {
-                                            ArrayList<String> active_as_arraylist = new ArrayList<>();
-                                            active_as_arraylist.add(Messages.getString("ViewManager.active_col"));
-                                            ArrayList<SimpleEntry<String, String>> active_no_as_updateValues = new ArrayList<>();
-                                            active_no_as_updateValues
-                                                    .add(new SimpleEntry<>(Messages.getString("ViewManager.active_col_set_to_n"),
-                                                            Messages.getString("ViewManager.char_datatype")));
-                                            if (controller.cascadeUpdate(selected_table, active_as_arraylist,
-                                                    active_no_as_updateValues, primaryKey_col_names, primaryKey_col_oldValue, operators, or)) {
-                                                active_no = true;
-                                            }
-                                            break;
-                                        }
-                                    }
-                                    if (active_no) {
-                                        showReportMessage(tables_updated, tables_not_updated,
-                                                Messages.getString("ViewManager.failed_report_msg_record") + report_message, true);
-
-                                    } else {
-                                        showReportMessage(tables_updated, tables_not_updated,
-                                                Messages.getString("ViewManager.failed_report_msg_record_update_active_to_no") + report_message,
-                                                false);
-                                    }
-                                }
-                            }
-                        });
-                        // System.out.println("Hello from content2");
-                        try {
-                            for (int r = 0; r < search_content.size(); r++) {
-                                for (int i = 0; i < search_content.get(r).size(); i++) {
-                                    for (dbCol col : primaryKey_col) {
-                                        primaryKey_col_oldValue.add(
-                                                new SimpleEntry<>(search_content.get(r).get(i).getValue(),
-                                                        col.getType()));
-                                    }
-
-                                }
-                            }
-                        } catch (Exception e) {
-                            System.err.print(e.getMessage());
-                        }
-                        if (primaryKey_col_oldValue.size() > 1 && cols_to_update.isEmpty()) {
-                            // case 2 :  fetch new data from where_values 
-                            // show old with radio btns and get selected once closed with non -1 returned value
-                            System.out.println("case2");
-                            ArrayList<String> getallcols = new ArrayList<>();
-                            getallcols.add(Messages.getString("Controller.select_all"));
-                            search_content = this.controller
-                                    .search(selected_table, getallcols, where_cols, where_values, operators, or);
-
-                            cols = new String[selected_table.getCols().size()];
-                            // prepare cols
-                            for (int j = 0; j < selected_table.getCols().size(); j++) {
-                                cols[j] = selected_table.getCols().get(j).getName();
-                            }
-                            // prepare data
-                            if (search_content != null) {
-                                if (search_content.size() > 0) {
-
-                                    data = new String[search_content.size()][cols.length];
-                                    for (int r = 0; r < search_content.size(); r++) {
-                                        for (int i = 0; i < search_content.get(r).size(); i++) {
-                                            data[r][i] = search_content.get(r).get(i).getValue();
-                                        }
-                                    }
-                                    final String finalmData[][] = data;
-                                    final String finalmCols[] = cols;
-                                    //primaryKey_col_oldValue.clear();
-                                    primaryKey_col_newValue.clear();
-                                    new Thread(() -> {
-                                        chooseRecordJDialog recordJDialog = new chooseRecordJDialog(finalmData, finalmCols);
-                                        recordJDialog.setVisible(true);
-
-                                        recordJDialog.addWindowListener(new WindowAdapter() {
-
-                                            @Override
-                                            public void windowClosed(WindowEvent e) {
-                                                super.windowClosed(e);
-                                                if (recordJDialog.getChoosenIndex() != -1) {
-                                                    final int user_choice = recordJDialog.getChoosenIndex();
-                                                    //    System.out.println("chosen: " + recordJDialog.getChoosenIndex());
-
-                                                    primaryKey_col.forEach((col) -> {
-                                                        for (int j = 0; j < finalmCols.length; j++) {
-                                                            if (col.getName().equals(finalmCols[j])) {
-                                                                primaryKey_col_newValue.add(
-                                                                        new SimpleEntry<>(finalmData[user_choice][j],
-                                                                                col.getType()));
-                                                            }
-                                                        }
-                                                    });
-                                                    for (int r = 0; r < finalmData.length; r++) {
-                                                        if (r != user_choice) {
-                                                            for (final dbCol col : primaryKey_col) {
-                                                                for (int j = 0; j < finalmCols.length; j++) {
-                                                                    if (col.getName().equals(finalmCols[j])) {
-                                                                        primaryKey_col_oldValue.add(
-                                                                                new SimpleEntry<>(finalmData[r][j],
-                                                                                        col.getType()));
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                    //System.out.println(primaryKey_col_newValue.size());
-                                                    //System.out.println(primaryKey_col_oldValue.size());
-                                                }
-                                            }
-                                        });
-                                    }).start();
-                                }
-                            }
-                        } else if (primaryKey_col_newValue.size() > 1 && !cols_to_update.isEmpty()) {
-                            Utils.showWarning("cannot determine which is old because entered data is multiple!\nplz, update old first");
-                        } else {
-                            // case 1 : fetch data from cols_to_update and result set to get pk_new_values
-                            // after get new data .. preview old record and new record (search result) ..
-                            // show confirm msg to start looping and update all!
-                            System.out.println("case1");
-
-                            if (!cols_to_update.isEmpty()) {
-
-                                ArrayList<String> getallcols = new ArrayList<>();
-                                getallcols.add(Messages.getString("Controller.select_all"));
-                                search_content = this.controller
-                                        .search(selected_table, getallcols, cols_to_update, update_values, operators, or);
-
-                                String[][] new_data;
-                                String[] new_cols = new String[selected_table.getCols().size()];
-                                // prepare cols
-                                for (int j = 0; j < selected_table.getCols().size(); j++) {
-                                    new_cols[j] = selected_table.getCols().get(j).getName();
-                                }
-                                // prepare data
-                                if (search_content != null) {
-                                    if (search_content.size() > 0) {
-
-                                        new_data = new String[search_content.size()][new_cols.length];
-                                        for (int r = 0; r < search_content.size(); r++) {
-                                            for (int i = 0; i < search_content.get(r).size(); i++) {
-                                                new_data[r][i] = search_content.get(r).get(i).getValue();
-                                            }
-                                        }
-
-                                        getallcols = new ArrayList<>();
-                                        getallcols.add(Messages.getString("Controller.select_all"));
-                                        search_content = this.controller
-                                                .search(selected_table, getallcols, where_cols, where_values, operators, or);
-
-                                        cols = new String[selected_table.getCols().size()];
-                                        // prepare cols
-                                        for (int j = 0; j < selected_table.getCols().size(); j++) {
-                                            cols[j] = selected_table.getCols().get(j).getName();
-                                        }
-                                        // prepare data
-                                        if (search_content != null) {
-                                            if (search_content.size() > 0) {
-
-                                                data = new String[search_content.size()][cols.length];
-                                                for (int r = 0; r < search_content.size(); r++) {
-                                                    for (int i = 0; i < search_content.get(r).size(); i++) {
-                                                        //     System.out.println("hi: " + search_content.get(r).get(i).getValue());
-                                                        data[r][i] = search_content.get(r).get(i).getValue();
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        final String[][] finalnewData = new_data;
-                                        final String finalnewCols[] = new_cols;
-                                        final String finalOldData[][] = data;
-                                        final String finalOldCols[] = cols;
-                                        // primaryKey_col_oldValue.clear();
-                                        // primaryKey_col_newValue.clear();
-                                        new Thread(() -> {
-                                            previewUpdateJDialog preview_updateJDialog = new previewUpdateJDialog(finalOldData, finalOldCols, finalnewData, finalnewCols);
-                                            preview_updateJDialog.setVisible(true);
-                                            preview_updateJDialog.addWindowListener(new WindowAdapter() {
-                                                @Override
-                                                public void windowClosed(WindowEvent e) {
-                                                    super.windowClosed(e);
-                                                    if (preview_updateJDialog.confirm) {
-                                                        //  setNewisExist(true);
-                                                        //    System.out.println("confirmed");
-                                                        for (int r = 0; r < finalnewData.length; r++) {
-                                                            for (int j = 0; j < finalnewCols.length; j++) {
-                                                                for (dbCol pk_col : primaryKey_col) {
-                                                                    if (pk_col.getName().equals(finalnewCols[j])) {
-                                                                        primaryKey_col_newValue.add(new SimpleEntry<>(finalnewData[r][j], pk_col.getType()));
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                        for (int r = 0; r < finalOldData.length; r++) {
-                                                            for (int j = 0; j < finalOldCols.length; j++) {
-                                                                for (dbCol pk_col : primaryKey_col) {
-                                                                    if (pk_col.getName().equals(finalOldCols[j])) {
-                                                                        primaryKey_col_oldValue.add(new SimpleEntry<>(finalOldData[r][j], pk_col.getType()));
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            );
-                                        }).start();
-                                    } else {
-                                        //   System.out.println("new data not exist");
-                                        finishingUpdate.start();
-                                    }
-                                }
-
-                                search_content = this.controller.search(selected_table,
-                                        primaryKey_col_names, cols_to_update, update_values, operators, or);
-
-                                if (search_content != null) {
-                                    if (search_content.size() > 0) {
-                                        setNewisExist(true);
-                                    }
-
-                                    try {
-                                        for (int r = 0; r < search_content.size(); r++) {
-                                            for (int i = 0; i < search_content.get(r).size(); i++) {
-                                                for (dbCol col : primaryKey_col) {
-                                                    primaryKey_col_newValue.add(new SimpleEntry<>(
-                                                            search_content.get(r).get(i).getValue(), col.getType()));
-                                                }
-                                            }
-                                        }
-                                    } catch (Exception e) {
-                                        System.err.print(e.getMessage());
-                                    }
-                                }
-                            } else {
-                                Utils.showError("old data is single record and couldn't execute update operation with such limited info!");
-                            }
-                        }
-                    }
-                } else {
-                    Utils.showError("there is no data with the entered old data!");
-                }
-            } else {
-                Utils.showError("u have to determine old data! no old data!");
-            }
-        } else {
-            Utils.showError("table has no cols!");
-        }
-    }
-
+//                                        final String[][] finalnewData = new_data;
+//                                        final String finalnewCols[] = new_cols;
+//                                        final String finalOldData[][] = data;
+//                                        final String finalOldCols[] = cols;
+//                                        // primaryKey_col_oldValue.clear();
+//                                        // primaryKey_col_newValue.clear();
+//                                        new Thread(() -> {
+//                                            previewUpdateJDialog preview_updateJDialog = new previewUpdateJDialog(finalOldData, finalOldCols, finalnewData, finalnewCols);
+//                                            preview_updateJDialog.setVisible(true);
+//                                            preview_updateJDialog.addWindowListener(new WindowAdapter() {
+//                                                @Override
+//                                                public void windowClosed(WindowEvent e) {
+//                                                    super.windowClosed(e);
+//                                                    if (preview_updateJDialog.confirm) {
+//                                                        //  setNewisExist(true);
+//                                                        //    System.out.println("confirmed");
+//                                                        for (int r = 0; r < finalnewData.length; r++) {
+//                                                            for (int j = 0; j < finalnewCols.length; j++) {
+//                                                                for (dbCol pk_col : primaryKey_col) {
+//                                                                    if (pk_col.getName().equals(finalnewCols[j])) {
+//                                                                        primaryKey_col_newValue.add(new SimpleEntry<>(finalnewData[r][j], pk_col.getType()));
+//                                                                    }
+//                                                                }
+//                                                            }
+//                                                        }
+//                                                        for (int r = 0; r < finalOldData.length; r++) {
+//                                                            for (int j = 0; j < finalOldCols.length; j++) {
+//                                                                for (dbCol pk_col : primaryKey_col) {
+//                                                                    if (pk_col.getName().equals(finalOldCols[j])) {
+//                                                                        primaryKey_col_oldValue.add(new SimpleEntry<>(finalOldData[r][j], pk_col.getType()));
+//                                                                    }
+//                                                                }
+//                                                            }
+//                                                        }
+//                                                    }
+//                                                }
+//                                            }
+//                                            );
+//                                        }).start();
+//                                    } else {
+//                                        //   System.out.println("new data not exist");
+//                                        finishingUpdate.start();
+//                                    }
+//                                }
+//
+//                                search_content = this.controller.search(selected_table,
+//                                        primaryKey_col_names, cols_to_update, update_values, operators, or);
+//
+//                                if (search_content != null) {
+//                                    if (search_content.size() > 0) {
+//                                        setNewisExist(true);
+//                                    }
+//
+//                                    try {
+//                                        for (int r = 0; r < search_content.size(); r++) {
+//                                            for (int i = 0; i < search_content.get(r).size(); i++) {
+//                                                for (dbCol col : primaryKey_col) {
+//                                                    primaryKey_col_newValue.add(new SimpleEntry<>(
+//                                                            search_content.get(r).get(i).getValue(), col.getType()));
+//                                                }
+//                                            }
+//                                        }
+//                                    } catch (Exception e) {
+//                                        System.err.print(e.getMessage());
+//                                    }
+//                                }
+//                            } else {
+//                                Utils.showError("old data is single record and couldn't execute update operation with such limited info!");
+//                            }
+//                        }
+//                    }
+//                } else {
+//                    Utils.showError("there is no data with the entered old data!");
+//                }
+//            } else {
+//                Utils.showError("u have to determine old data! no old data!");
+//            }
+//        } else {
+//            Utils.showError("table has no cols!");
+//        }
+//    }
     @SuppressWarnings({"unchecked", "deprecation"})
     public void searchInOthersActionPerformed() {
         String[] cols = ((SearchPanel) jPanel_operation).getResult_table_cols();
@@ -1456,6 +1440,7 @@ public class ViewManager extends javax.swing.JFrame {
         jScrollPane.setViewportView(textArea);
         dialog.add(jScrollPane);
         dialog.setTitle(title);
+        dialog.setAlwaysOnTop(true);
 
         dialog.setPreferredSize(
                 new Dimension(getToolkit().getScreenSize().width / 2, getToolkit().getScreenSize().height / 2));
@@ -1501,42 +1486,41 @@ public class ViewManager extends javax.swing.JFrame {
         }
     }
 
-    private void deleteAllActionPerformed() {
-
-        // System.out.println("Hello from ViewManager, deletePanel calls me!! what do u
-        // want ?! gvme data to delete plz");
-        String Cond_where_multiple_cols = ((DeletePanel) jPanel_operation).getCond_where_multiple_cols();
-        boolean or = true;
-        if (Cond_where_multiple_cols.equals(Messages.getString("ViewManager.AND_where_multiple_col_cond"))) {
-            or = false;
-        }
-
-        ArrayList<colPanel> where_colPanels = ((DeletePanel) jPanel_operation).getColPanels();
-        DbTable selected_table = ((DeletePanel) jPanel_operation).getSelectedTable();
-
-        ArrayList<String> where_cols = new ArrayList<>();
-        ArrayList<SimpleEntry<String, String>> where_values = new ArrayList<>();
-        ArrayList<String> operators = new ArrayList<>();
-
-        for (int i = 0; i < selected_table.getCols().size(); i++) {
-            if (!where_colPanels.get(i).getjTextField_colvalue().getText().isEmpty()) {
-                where_cols.add(selected_table.getCols().get(i).getName());
-                where_values.add(new SimpleEntry<>(where_colPanels.get(i).getjTextField_colvalue().getText(),
-                        selected_table.getCols().get(i).getType()));
-                operators.add(where_colPanels.get(i).getjComboBox_STATIC_OPERATORS().getSelectedItem().toString());
-
-            }
-        }
-
-        boolean assurance = this.controller.cascadeDelete(selected_table, where_cols, where_values,operators, or);
-        if (assurance) {
-            Utils.showCongrats(Messages.getString("ViewManager.done"));
-
-        } else {
-            Utils.showError("Cannot delete!");
-        }
-    }
-
+//    private void deleteAllActionPerformed() {
+//
+//        // System.out.println("Hello from ViewManager, deletePanel calls me!! what do u
+//        // want ?! gvme data to delete plz");
+//        String Cond_where_multiple_cols = ((DeletePanel) jPanel_operation).getCond_where_multiple_cols();
+//        boolean or = true;
+//        if (Cond_where_multiple_cols.equals(Messages.getString("ViewManager.AND_where_multiple_col_cond"))) {
+//            or = false;
+//        }
+//
+//        ArrayList<colPanel> where_colPanels = ((DeletePanel) jPanel_operation).getColPanels();
+//        DbTable selected_table = ((DeletePanel) jPanel_operation).getSelectedTable();
+//
+//        ArrayList<String> where_cols = new ArrayList<>();
+//        ArrayList<SimpleEntry<String, String>> where_values = new ArrayList<>();
+//        ArrayList<String> operators = new ArrayList<>();
+//
+//        for (int i = 0; i < selected_table.getCols().size(); i++) {
+//            if (!where_colPanels.get(i).getjTextField_colvalue().getText().isEmpty()) {
+//                where_cols.add(selected_table.getCols().get(i).getName());
+//                where_values.add(new SimpleEntry<>(where_colPanels.get(i).getjTextField_colvalue().getText(),
+//                        selected_table.getCols().get(i).getType()));
+//                operators.add(where_colPanels.get(i).getjComboBox_STATIC_OPERATORS().getSelectedItem().toString());
+//
+//            }
+//        }
+//
+//        boolean assurance = this.controller.cascadeDelete(selected_table, where_cols, where_values, operators, or);
+//        if (assurance) {
+//            Utils.showCongrats(Messages.getString("ViewManager.done"));
+//
+//        } else {
+//            Utils.showError("Cannot delete!");
+//        }
+//    }
     private void insertBtnActionPerformed() {
         // System.out.println("Hello from ViewManager, insertPanel calls me!! what do u
         // want ?! gvme data to insert plz");
@@ -1616,7 +1600,6 @@ public class ViewManager extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem_help;
     private javax.swing.JMenuItem jMenuItem_logout;
     private javax.swing.JMenuItem jMenuItem_refreshTables;
-    private javax.swing.JMenuItem jMenuItem_userInfo;
     private javax.swing.JMenu jMenu_info;
     private javax.swing.JMenu jMenu_refresh_tables;
     private javax.swing.JMenu jMenu_schema;
@@ -1629,8 +1612,8 @@ public class ViewManager extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton_update;
     private javax.swing.JPanel op_btnsPanels;
     // End of variables declaration//GEN-END:variables
- private javax.swing.JButton jButton_updateALL;
+    //private javax.swing.JButton jButton_updateALL;
     private javax.swing.JButton jButton_search_Others;
-    private javax.swing.JButton jButton_deleteALL;
+    //private javax.swing.JButton jButton_deleteALL;
 
 }

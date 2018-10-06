@@ -54,8 +54,8 @@ public class User {
 				User_String += p.toString() + Messages.getString("User.space_string"); //$NON-NLS-1$
 
 		}
-		User_String += Messages.getString("User.field_delimiter"); //$NON-NLS-1$
-		//System.out.println(User_String);
+                User_String+="\n";
+				//System.out.println(User_String);
 		return User_String;
 	}
 

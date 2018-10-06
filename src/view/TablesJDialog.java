@@ -22,6 +22,10 @@ public class TablesJDialog extends javax.swing.JDialog {
 	private ArrayList<JCheckBox> checkBox_tables2accessed;
     private boolean done = true;
 
+    /**
+     *
+     * @return
+     */
     public boolean isDone() {
         return done;
     }
