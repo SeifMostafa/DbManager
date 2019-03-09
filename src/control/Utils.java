@@ -10,7 +10,7 @@ import view.MsgJFrame;
 import view.colPanel;
 
 /**
- *
+ * utilities functions
  * @author dotnet2
  */
 public class Utils {

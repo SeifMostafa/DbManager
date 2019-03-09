@@ -36,14 +36,17 @@ public class Controller {
      * any exceptions may happen in between handle any additional work related
      * to update process such as any animation, commit ..etc
      *
-     * @param table_name
-     * @param cols_to_update
-     * @param where_values
-     * @param new_values
-     * @param where_cols
-     * @param operator
-     * @param or
-     * @return
+     * @param table_name : to update
+     * @param cols_to_update columns to be updated from table_name
+     * @param where_cols : where columns in where clause
+     * @param where_values : where values in order for where_cols in where
+     * clause
+     * @param new_values : new values to update
+     * @param operator : between where col. and its value such as like,=,> or
+     * contains.
+     * @param or : flag to determine if we combine where cols with "or" or "and"
+     * logic operator!=.
+     * @return boolean flag true if successfully updated, false otherwise
      */
     public boolean update(String table_name, ArrayList<String> cols_to_update,
             ArrayList<SimpleEntry<String, String>> new_values, ArrayList<String> where_cols,
@@ -140,15 +143,19 @@ public class Controller {
     }
 
     /**
+     * not used in this version.
      *
-     * @param table
-     * @param cols_to_update
-     * @param new_values
-     * @param where_cols
-     * @param where_values
-     * @param operator
-     * @param or
-     * @return
+     * @param table : to update
+     * @param cols_to_update columns to be updated from table
+     * @param new_values : new values to update
+     * @param where_cols : where columns in where clause
+     * @param where_values : where values in order for where_cols in where
+     * clause
+     * @param operator : between where col. and its value such as like,=,> or
+     * contains.
+     * @param or : flag to determine if we combine where cols with "or" or "and"
+     * logic operator!=.
+     * @return boolean flag true if successfully updated, false otherwise
      */
     public boolean cascadeUpdate(DbTable table, ArrayList<String> cols_to_update,
             ArrayList<SimpleEntry<String, String>> new_values, ArrayList<String> where_cols,
@@ -194,13 +201,18 @@ public class Controller {
     }
 
     /**
+     * not used in this version
      *
-     * @param table
-     * @param where_cols
-     * @param where_values
-     * @param operator
-     * @param or
-     * @return
+     * @param table : to cascade delete
+     *
+     * @param where_cols : where columns in where clause
+     * @param where_values : where values in order for where_cols in where
+     * clause
+     * @param operator : between where col. and its value such as like,=,> or
+     * contains.
+     * @param or : flag to determine if we combine where cols with "or" or "and"
+     * logic operator!=.
+     * @return boolean flag true if successfully updated, false otherwise
      */
     public boolean cascadeDelete(DbTable table, ArrayList<String> where_cols,
             ArrayList<SimpleEntry<String, String>> where_values, ArrayList<String> operator, boolean or) {
@@ -237,6 +249,9 @@ public class Controller {
         return result;
     }
 
+    /*
+ * used in cascade delete
+     */
     private boolean deleteChildTables(ArrayList<ref> refs, ArrayList<String> pks, ArrayList<SimpleEntry<String, String>> old_pks, ArrayList<String> operator, boolean or) {
         boolean isAllDeleted = true;
         SQLBuilder builder = SQLBuilder.getInstance();
@@ -307,6 +322,9 @@ public class Controller {
         return isAllDeleted;
     }
 
+    /*
+ * used in cascade delete
+     */
     private boolean deleteChilds(ArrayList<ref> refs, ArrayList<SimpleEntry<String, String>> old_pks, ArrayList<String> operator, boolean or) {
         boolean isAllDeleted = true;
         ArrayList<ref> ref_childs = new ArrayList<>();
@@ -370,15 +388,16 @@ public class Controller {
 
         return isAllDeleted;
     }
+
     /**
-     * 
+     *
      * @param refs
      * @param pks
      * @param new_pks
      * @param old_pks
      * @param operator
      * @param or
-     * @return 
+     * @return
      */
     private boolean updateChildTables(ArrayList<ref> refs, ArrayList<String> pks, ArrayList<SimpleEntry<String, String>> new_pks, ArrayList<SimpleEntry<String, String>> old_pks, ArrayList<String> operator, boolean or) {
         boolean isAllUpdated = true;
@@ -913,6 +932,9 @@ public class Controller {
         return;
     }
 
+    /**
+     *
+     */
     public Controller() {
         super();
 
@@ -937,7 +959,13 @@ public class Controller {
      */
     public static class ref {
 
+        /**
+         *
+         */
         public String table_name,
+                /**
+                 *
+                 */
                 col_name;
 
         ref(String mTable_name, String c_name) {

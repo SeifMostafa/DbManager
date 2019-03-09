@@ -10,29 +10,36 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 /**
- *
+ * GUI for only one database column 
  * @author dotnet2
  */
 public class colPanel extends javax.swing.JPanel {
 
-    /**
-     *
-     */
+   
     private static final long serialVersionUID = 1L;
     /**
      * Creates new form colPanel
      */
     String colName;
 
+    /**
+     *
+     * @param ColName to be set as column name
+     */
     public colPanel(String ColName) {
         this.colName = ColName;
         initComponents();
     }
 
+    /**
+     *
+     * @param visible to be visible or not
+     */
     public void setcomboBoxSignOperatorsVisibility(boolean visible) {
         jComboBox_STATIC_OPERATORS.setVisible(visible);
     }
 
+   
     public colPanel() {
         initComponents();
     }
@@ -89,14 +96,26 @@ public class colPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField_colvalue;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     *
+     * @return
+     */
     public JComboBox<String> getjComboBox_STATIC_OPERATORS() {
         return jComboBox_STATIC_OPERATORS;
     }
 
+    /**
+     *
+     * @return
+     */
     public JTextField getjTextField_colvalue() {
         return jTextField_colvalue;
     }
 
+    /**
+     *
+     * @param jTextField_colvalue
+     */
     public void setjTextField_colvalue(String jTextField_colvalue) {
         this.jTextField_colvalue.setText(jTextField_colvalue);
     }

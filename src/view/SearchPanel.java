@@ -12,15 +12,12 @@ import javax.swing.border.EmptyBorder;
 import model.DbTable;
 
 /**
+ * search panel GUI
  *
  * @author dotnet2
  */
 public class SearchPanel extends javax.swing.JPanel {
-    // required for data show
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
     ArrayList<DbTable> mTables;
     String[] table_names;
@@ -34,10 +31,18 @@ public class SearchPanel extends javax.swing.JPanel {
 
     private DbTable selectedTable;
 
+    /**
+     *
+     * @return selected table
+     */
     public DbTable getSelectedTable() {
         return selectedTable;
     }
 
+    /**
+     *
+     * @param selectedTable to set selected table
+     */
     public void setSelectedTable(DbTable selectedTable) {
         this.selectedTable = selectedTable;
     }
@@ -45,7 +50,7 @@ public class SearchPanel extends javax.swing.JPanel {
     /**
      * Creates new form searchPanel
      *
-     * @param tables
+     * @param tables to be shown as available tables
      */
     public SearchPanel(ArrayList<DbTable> tables) {
         this.mTables = tables;
@@ -68,14 +73,26 @@ public class SearchPanel extends javax.swing.JPanel {
 
     }
 
+    /**
+     *
+     * @return colPanels
+     */
     public ArrayList<colPanel> getColPanels() {
         return colPanels;
     }
 
+    /**
+     *
+     * @return check boxes to indicate which cols. to select
+     */
     public ArrayList<JCheckBox> getCheckBox_col2get() {
         return checkBox_col2get;
     }
 
+    /**
+     *
+     * @param colPanels to be set as columns panels
+     */
     public void setColPanels(ArrayList<colPanel> colPanels) {
         this.colPanels = colPanels;
     }
@@ -236,7 +253,9 @@ public class SearchPanel extends javax.swing.JPanel {
 
             }
         }    }//GEN-LAST:event_jComboBox_table_namesActionPerformed
-
+    /**
+     * depending on chosen table , draw cols
+     */
     private void colSetup() {
 
         jPanel_where_cols.removeAll();
@@ -271,6 +290,9 @@ public class SearchPanel extends javax.swing.JPanel {
     /*
 	 * draw and add jTable
      */
+    /**
+     *
+     */
     @SuppressWarnings("deprecation")
     public void drawResult() {
 
@@ -279,6 +301,11 @@ public class SearchPanel extends javax.swing.JPanel {
         dialog.show();
     }
 
+    /**
+     *
+     * @param TableAppendedName
+     * @param exists
+     */
     public void appendTableAsSearchInOthers(String TableAppendedName, Boolean[] exists) {
         // prepare rows
         String[][] tempResultData_rows = new String[result_data.length][result_data[0].length + 1];
@@ -309,30 +336,58 @@ public class SearchPanel extends javax.swing.JPanel {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public String[][] getResult_data() {
         return result_data;
     }
 
+    /**
+     *
+     * @param result_data
+     */
     public void setResult_data(String[][] result_data) {
         this.result_data = result_data;
     }
 
+    /**
+     *
+     * @return
+     */
     public String[] getResult_table_cols() {
         return result_table_cols;
     }
 
+    /**
+     *
+     * @param result_table_cols
+     */
     public void setResult_table_cols(String[] result_table_cols) {
         this.result_table_cols = result_table_cols;
     }
 
+     /**
+     *
+     * @return String to specify if logic operator between where conditions is "or" or "and"
+     */
     public DbTable getOtherTablesAppended() {
         return otherTablesAppended;
     }
 
+    /**
+     *
+     * @param dbTable
+     */
     public void setOtherTablesAppended(DbTable dbTable) {
         this.otherTablesAppended = dbTable;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCond_where_multiple_cols() {
         if (jRadioButton_or.isSelected()) {
             return Messages.getString("SearchPanel.or"); //$NON-NLS-1$ //$NON-NLS-2$

@@ -12,32 +12,25 @@ import model.DbConfigs;
 import view.LoginPage;
 
 /**
- *
+ * MAIN CLASS
  * @author dotnet2
  */
 public class DbManager {
     
-    /**
-     *
-     */
+  
     public static DbConfigs[] schemas;
     static Boolean readyToStart = false;
 
-    /**
-     *
-     */
+  
     public static Semaphore semaphore_stopMAIN;
 
-    /**
-     *
-     */
     public static DbConfigs dbConfigs;
     private static DbManager dbManager;
     
-    /**
-     *
-     * @param args
-     */
+   /**
+    * 
+    * @param args  main class args
+    */
     public static void main(String[] args) {
         
        try {
@@ -84,19 +77,17 @@ public class DbManager {
     	
     }
 
-    /*
+    /**
 	 * to create object (not to die - single ton)
      */
     private DbManager() {
         
     }
-    /*
-    get the object (instance)
-     */
+  
 
     /**
      *
-     * @return
+     * @return  the object (instance)
      */
 
     public static DbManager getInstance() {
@@ -105,7 +96,5 @@ public class DbManager {
         }
         return dbManager;
     }
-//    public static ArrayList<String> readExcelSheet(){
-//    	
-//    }
+
 }

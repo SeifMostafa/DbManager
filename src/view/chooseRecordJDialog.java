@@ -12,7 +12,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 /**
- *
+ * choose record
  * @author dotnet2
  */
 public class chooseRecordJDialog extends javax.swing.JDialog {
@@ -25,16 +25,26 @@ public class chooseRecordJDialog extends javax.swing.JDialog {
     private String[] mCols;
     private int choosenIndex = -1;
 
+    /**
+     *
+     * @return
+     */
     public int getChoosenIndex() {
         return choosenIndex;
     }
 
+    /**
+     *
+     * @param choosenIndex
+     */
     public void setChoosenIndex(int choosenIndex) {
         this.choosenIndex = choosenIndex;
     }
 
     /**
      * Creates new form chooseRecordJDialog
+     * @param data
+     * @param cols
      */
     public chooseRecordJDialog(String[][] data, String[] cols) {
         this.mData = data;

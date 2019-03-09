@@ -8,18 +8,20 @@ package view;
 import javax.swing.JTable;
 
 /**
+ * to show search results GUI
  *
  * @author dotnet2
  */
 public class SearchResultJDialog extends javax.swing.JDialog {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	String[][] result_data;
+    private static final long serialVersionUID = 1L;
+    String[][] result_data;
     String[] result_table_cols;
 
+    /**
+     *
+     * @param jTable to be set as database table that search in
+     */
     public SearchResultJDialog(JTable jTable) {
         this.jTable_result = jTable;
 

@@ -3,90 +3,154 @@ package model;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * database table : table name, columns and their data types (dbCol)
+ *
+ * @author dotnet2
+ */
 public class DbTable {
-	public String name;
-	ArrayList<dbCol> cols; // cols: col_name ,col_dataType
 
-	public DbTable(String name, ArrayList<dbCol> cols) {
-		super();
-		this.name = name;
-		this.cols = cols;
-	}
+    /**
+     *
+     */
+    public String name;
+    ArrayList<dbCol> cols; // cols: col_name ,col_dataType
 
-    public DbTable() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     *
+     * @param name table name
+     * @param cols table columns
+     */
+    public DbTable(String name, ArrayList<dbCol> cols) {
+        super();
+        this.name = name;
+        this.cols = cols;
     }
-    public String getColType(String colName){
-        for(dbCol c:this.cols){
-            if(c.name.equals(colName)){
+
+    /**
+     *
+     * @param colName to indicate table column
+     * @return data type for colName
+     */
+    public String getColType(String colName) {
+        for (dbCol c : this.cols) {
+            if (c.name.equals(colName)) {
                 return c.type;
             }
         }
         return null;
     }
-        public dbCol getCol(String colName){
-        for(dbCol c:this.cols){
-            if(c.name.equals(colName)){
+
+    /**
+     *
+     * @param colName to indicate column
+     * @return database column(dbCol)
+     */
+    public dbCol getCol(String colName) {
+        for (dbCol c : this.cols) {
+            if (c.name.equals(colName)) {
                 return c;
             }
         }
         return null;
     }
-	@Override
-	public String toString() {
-		return Messages.getString("DbTable.name") + name + Messages.getString("DbTable.cols") + cols + Messages.getString("DbTable.end_line"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-	}
 
-	public static class dbCol {
-		String name, type;
-		boolean acceptNull;
+    @Override
+    public String toString() {
+        return Messages.getString("DbTable.name") + name + Messages.getString("DbTable.cols") + cols + Messages.getString("DbTable.end_line"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+    }
 
-		public dbCol(String name, String type, boolean acceptNull) {
-			super();
-			this.name = name;
-			this.type = type;
-			this.acceptNull = acceptNull;
-		}
+    /**
+     * database col (name , type and accept NULL flag)
+     */
+    public static class dbCol {
 
-		public String getName() {
-			return name;
-		}
+        String name, type;
+        boolean acceptNull;
 
-		public void setName(String name) {
-			this.name = name;
-		}
+        /**
+         *
+         * @param name column name
+         * @param type column data type
+         * @param acceptNull accept null flag
+         */
+        public dbCol(String name, String type, boolean acceptNull) {
+            super();
+            this.name = name;
+            this.type = type;
+            this.acceptNull = acceptNull;
+        }
 
-		public String getType() {
-			return type;
-		}
+        /**
+         *
+         * @return col. name
+         */
+        public String getName() {
+            return name;
+        }
 
-		public void setType(String type) {
-			this.type = type;
-		}
+        /**
+         *
+         * @param name to set column name
+         */
+        public void setName(String name) {
+            this.name = name;
+        }
 
-		public boolean isAcceptNull() {
-			return acceptNull;
-		}
+        /**
+         *
+         * @return to get col. type
+         */
+        public String getType() {
+            return type;
+        }
 
-		public void setAcceptNull(boolean acceptNull) {
-			this.acceptNull = acceptNull;
-		}
+        /**
+         *
+         * @param type to set col. type
+         */
+        public void setType(String type) {
+            this.type = type;
+        }
 
-		@Override
-		public String toString() {
-			return Messages.getString("DbTable.dbCol") + name + Messages.getString("DbTable.db_col_type") + type + Messages.getString("DbTable.db_col_accept_null") + acceptNull + Messages.getString("DbTable.closing_square_bracket"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		}
-		
+        /**
+         *
+         * @return true if accepting null, false if not
+         */
+        public boolean isAcceptNull() {
+            return acceptNull;
+        }
 
-	}
+        /**
+         *
+         * @param acceptNull to set accept null flag
+         */
+        public void setAcceptNull(boolean acceptNull) {
+            this.acceptNull = acceptNull;
+        }
 
-	public String getName() {
-		return name;
-	}
+        @Override
+        public String toString() {
+            return Messages.getString("DbTable.dbCol") + name + Messages.getString("DbTable.db_col_type") + type + Messages.getString("DbTable.db_col_accept_null") + acceptNull + Messages.getString("DbTable.closing_square_bracket"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+        }
 
-	public ArrayList<dbCol> getCols() {
-		return cols;
-	};
+    }
+
+    /**
+     *
+     * @return to return database table name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     *
+     * @return table columns
+     */
+    public ArrayList<dbCol> getCols() {
+        return cols;
+    }
 
     @Override
     public int hashCode() {
@@ -111,5 +175,5 @@ public class DbTable {
         }
         return true;
     }
-	
+
 }

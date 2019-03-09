@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import model.DbTable;
 
 /**
+ * Update panel GUI
  *
  * @author dotnet2
  */
@@ -31,11 +32,11 @@ public class UpdatePanel extends javax.swing.JPanel {
      */
     public UpdatePanel(ArrayList<DbTable> tables) {
         this.mTables = tables;
-        int catalog_item_most_common_index =0;
+        int catalog_item_most_common_index = 0;
         table_names = new String[mTables.size()];
         for (int i = 0; i < mTables.size(); i++) {
             table_names[i] = mTables.get(i).getName();
-               if (mTables.get(i).getName().equals("CATALOG_ITEM")) {
+            if (mTables.get(i).getName().equals("CATALOG_ITEM")) {
                 catalog_item_most_common_index = i;
             }
         }
@@ -46,9 +47,9 @@ public class UpdatePanel extends javax.swing.JPanel {
 
         this.setPreferredSize(
                 new Dimension(getToolkit().getScreenSize().width - 100, getToolkit().getScreenSize().height - 200));
-       
-            jComboBox_table_names.setSelectedIndex(catalog_item_most_common_index);
-       
+
+        jComboBox_table_names.setSelectedIndex(catalog_item_most_common_index);
+
     }
 
     /**
@@ -204,12 +205,16 @@ public class UpdatePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jComboBox_table_namesActionPerformed
 
+    /**
+     *
+     * @param dbTable to be set as selected database table
+     */
     protected void setSelectedTable(DbTable dbTable) {
         this.selectedTable = dbTable;
     }
 
-    /*
-	 * depending on chosen table , draw cols
+    /**
+     * depending on chosen table , draw cols
      */
     private void colSetup() {
 
@@ -236,18 +241,34 @@ public class UpdatePanel extends javax.swing.JPanel {
         repaint();
     }
 
+    /**
+     *
+     * @return full cols to be updated
+     */
     public ArrayList<colPanel> getToUpdateColsPanels() {
         return toUpdateColsPanels;
     }
 
+    /**
+     *
+     * @return selected table
+     */
     public DbTable getSelectedTable() {
         return selectedTable;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<colPanel> getColPanels() {
         return colPanels;
     }
 
+     /**
+     *
+     * @return String to specify if logic operator between where conditions is "or" or "and"
+     */
     public String getCond_where_multiple_cols() {
         if (jRadioButton_or.isSelected()) {
             return Messages.getString("SearchPanel.or"); //$NON-NLS-1$ //$NON-NLS-2$

@@ -10,21 +10,19 @@ import javax.swing.JCheckBox;
 import model.DbTable;
 
 /**
- *
+ * to show tables ::GUI 
+ * used in addUser so master user determine which tables to be available for user
  * @author dotnet2
  */
 public class TablesJDialog extends javax.swing.JDialog {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private ArrayList<JCheckBox> checkBox_tables2accessed;
     private boolean done = true;
 
     /**
      *
-     * @return
+     * @return if selecting tables process is successfully done
      */
     public boolean isDone() {
         return done;

@@ -2,7 +2,10 @@ package control;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-
+/**
+ * to get proper messages for users
+ * @author dotnet2
+ */
 public class Messages {
 
     private static final String BUNDLE_NAME = "control.messages"; //$NON-NLS-1$

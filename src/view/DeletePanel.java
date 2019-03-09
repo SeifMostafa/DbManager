@@ -11,14 +11,12 @@ import javax.swing.JPanel;
 import model.DbTable;
 
 /**
+ * delete panel :: GUI
  *
  * @author dotnet2
  */
 public class DeletePanel extends javax.swing.JPanel {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
     private DbTable selectedTable;
     ArrayList<DbTable> mTables;
@@ -193,8 +191,8 @@ public class DeletePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jComboBox_table_namesActionPerformed
 
-    /*
- * depending on chosen table , draw cols
+    /**
+     * depending on chosen table , draw cols
      */
     private void colSetup() {
 
@@ -212,22 +210,42 @@ public class DeletePanel extends javax.swing.JPanel {
         repaint();
     }
 
+    /**
+     *
+     * @return selected database table
+     */
     public DbTable getSelectedTable() {
         return selectedTable;
     }
 
+    /**
+     *
+     * @param selectedTable set selected table
+     */
     public void setSelectedTable(DbTable selectedTable) {
         this.selectedTable = selectedTable;
     }
 
+    /**
+     *
+     * @return col return full column panels 
+     */
     public ArrayList<colPanel> getColPanels() {
         return colPanels;
     }
 
+    /**
+     *
+     * @param colPanels to set column panels
+     */
     public void setColPanels(ArrayList<colPanel> colPanels) {
         this.colPanels = colPanels;
     }
 
+    /**
+     *
+     * @return String to specify if logic operator between where conditions is "or" or "and"
+     */
     public String getCond_where_multiple_cols() {
         if (jRadioButton_or.isSelected()) {
             return Messages.getString("SearchPanel.or"); //$NON-NLS-1$ //$NON-NLS-2$

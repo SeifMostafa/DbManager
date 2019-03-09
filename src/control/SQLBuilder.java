@@ -4,7 +4,7 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 
 /**
- *
+ * responsible for building queries
  * @author dotnet2
  */
 public class SQLBuilder {

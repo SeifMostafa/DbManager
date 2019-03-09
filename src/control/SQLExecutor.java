@@ -16,6 +16,9 @@ import java.util.logging.Logger;
 import model.DbTable;
 import model.DbTable.dbCol;
 
+/**
+ * responsible for executing queries have been built by mBuilder attribute  *
+ */
 public class SQLExecutor {
 
     SQLBuilder mBuilder;

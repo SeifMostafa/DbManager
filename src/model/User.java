@@ -3,69 +3,120 @@ package model;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * app. user: permission (search,update,insert delete ), username, password,
+ * open tables for this users
+ *
+ * @author dotnet2
+ */
 public class User {
 
     public User() {
     }
-	public enum PERMISSION {
-		SEARCH, UPDATE, DELETE, INSERT, MASTER
-	};
+    /**
+     * master to indicate all of them .. DML operations (search, update,delete,insert)
+     */
+    public enum PERMISSION {
 
-	private String username, password;
-        ArrayList<DbTable> access_tables=null;
+        SEARCH,
+        UPDATE,
+        DELETE,
+        INSERT,
+        MASTER
+    };
 
+    private String username, password;
+    ArrayList<DbTable> access_tables = null;
+
+    /**
+     *
+     * @param username to be set as user's username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     *
+     * @param password to be set as user's password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     *
+     * @return to get open tables for this user
+     */
     public ArrayList<DbTable> getAccess_tables() {
         return access_tables;
     }
 
+    /**
+     *
+     * @param access_tables to set open tables for this user
+     */
     public void setAccess_tables(ArrayList<DbTable> access_tables) {
         this.access_tables = access_tables;
     }
-	PERMISSION[] permissions = null;
+    PERMISSION[] permissions = null;
 
-	public PERMISSION[] getPermissions() {
-		return permissions;
-	}
+    /**
+     *
+     * @return user's permissions
+     */
+    public PERMISSION[] getPermissions() {
+        return permissions;
+    }
 
-	public void setPermissions(PERMISSION[] permissions) {
-		this.permissions = permissions;
-	}
+    /**
+     *
+     * @param permissions to be set as user's permissions
+     */
+    public void setPermissions(PERMISSION[] permissions) {
+        this.permissions = permissions;
+    }
 
-	public User(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
-	}
+    /**
+     *
+     * @param username to be set as this.username
+     * @param password to be set as this.password
+     */
+    public User(String username, String password) {
+        super();
+        this.username = username;
+        this.password = password;
+    }
 
-	@Override
-	public String toString() {
-		String User_String = username + Messages.getString("User.field_delimiter") + password; //$NON-NLS-1$
-		if (permissions != null) {
-			User_String +=Messages.getString("User.field_delimiter"); //$NON-NLS-1$
-			for (PERMISSION p : permissions)
-				User_String += p.toString() + Messages.getString("User.space_string"); //$NON-NLS-1$
+    @Override
+    public String toString() {
+        String User_String = username + Messages.getString("User.field_delimiter") + password; //$NON-NLS-1$
+        if (permissions != null) {
+            User_String += Messages.getString("User.field_delimiter"); //$NON-NLS-1$
+            for (PERMISSION p : permissions) {
+                User_String += p.toString() + Messages.getString("User.space_string"); //$NON-NLS-1$
+            }
+        }
+        User_String += "\n";
+        //System.out.println(User_String);
+        return User_String;
+    }
 
-		}
-                User_String+="\n";
-				//System.out.println(User_String);
-		return User_String;
-	}
+    /**
+     *
+     * @return return username
+     */
+    public String getUsername() {
+        return username;
+    }
 
-	public String getUsername() {
-		return username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * 
+     * @return password
+     */
+    public String getPassword() {
+        return password;
+    }
 
     @Override
     public int hashCode() {
@@ -96,5 +147,4 @@ public class User {
         return true;
     }
 
-        
 }

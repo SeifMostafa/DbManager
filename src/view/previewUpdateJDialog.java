@@ -9,23 +9,30 @@ import dbmanager.ViewManager;
 import javax.swing.JTable;
 
 /**
- *
+ * preview update from do update process first
  * @author dotnet2
  */
 public class previewUpdateJDialog extends javax.swing.JDialog {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-	public boolean confirm = true;
+    /**
+     *
+     */
+    public boolean confirm = true;
 
     String[][] mOldData;
     String[] mOldCols;
     String mNewData[][];
     String[] mNewCols;
 
+    /**
+     *
+     * @param oldData old values to be updated based on
+     * @param oldCols old cols to be updated
+     * @param newData new values to set on update
+     * @param newCols new cols to update
+     */
     public previewUpdateJDialog(String[][] oldData, String[] oldCols, String newData[][], String[] newCols) {
         this.mOldData = oldData;
         this.mOldCols = oldCols;

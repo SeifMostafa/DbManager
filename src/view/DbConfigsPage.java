@@ -13,7 +13,7 @@ import model.DbConfigs;
 import model.User;
 
 /**
- *
+ * database configuration page :: GUI
  * @author dotnet2
  */
 public class DbConfigsPage extends javax.swing.JFrame {
@@ -23,23 +23,30 @@ public class DbConfigsPage extends javax.swing.JFrame {
 	 */
 	DbConfigs configs;
 
-	public DbConfigsPage() {
+    
+    public DbConfigsPage() {
 		initComponents();
 		setLocation(getToolkit().getScreenSize().width / 4, getToolkit().getScreenSize().height / 4);
 
 	}
 
-	/**
-	 *
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	User user = null;
 
-	public User getUser() {
+    /**
+     * get user
+     * @return
+     */
+    public User getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+    /**
+     * set user
+     * @param user
+     */
+    public void setUser(User user) {
 		this.user = user;
 	}
 
@@ -226,19 +233,35 @@ public class DbConfigsPage extends javax.swing.JFrame {
 		this.dispose();
 	}// GEN-LAST:event_jButton_cancelActionPerformed
 
-	public DbConfigs getConfigs() {
+    /**
+     *
+     * @return database configurations
+     */
+    public DbConfigs getConfigs() {
 		return configs;
 	}
 
-	public void setConfigs(DbConfigs configs) {
+    /**
+     *
+     * @param configs to be set as database configurations
+     */
+    public void setConfigs(DbConfigs configs) {
 		this.configs = configs;
 	}
 
-	public boolean isDone() {
+    /**
+     *
+     * @return if database is configured successfully 
+     */
+    public boolean isDone() {
 		return done;
 	}
 
-	public void setDone(boolean done) {
+    /**
+     *
+     * @param done to be set as database configured done
+     */
+    public void setDone(boolean done) {
 		this.done = done;
 	}
 
@@ -283,10 +306,17 @@ public class DbConfigsPage extends javax.swing.JFrame {
 	private javax.swing.JTextField jTextField_username;
 	// End of variables declaration//GEN-END:variables
 
-	public javax.swing.JCheckBox jCheckBox_delete_permission;
-	public javax.swing.JCheckBox jCheckBox_insert_permission;
-	public javax.swing.JCheckBox jCheckBox_search_permission;
-	public javax.swing.JCheckBox jCheckBox_update_permission;
+  
+    public javax.swing.JCheckBox jCheckBox_delete_permission;
+
+
+    public javax.swing.JCheckBox jCheckBox_insert_permission;
+
+  
+    public javax.swing.JCheckBox jCheckBox_search_permission;
+
+
+    public javax.swing.JCheckBox jCheckBox_update_permission;
 	private boolean done = false;
 
 }

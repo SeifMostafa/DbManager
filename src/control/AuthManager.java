@@ -1,7 +1,10 @@
 package control;
 
 import model.User;
-
+/**
+ * responsible for user authentication processes 
+ * @author dotnet2
+ */
 public class AuthManager {
 
     User user;

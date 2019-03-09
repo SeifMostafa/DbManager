@@ -20,19 +20,17 @@ import model.User;
 import model.User.PERMISSION;
 
 /**
- *
+ * add user GUI
  * @author dotnet2
  */
 public class addUserJFrame extends javax.swing.JFrame {
 
-	/**
-	 *
-	 */
+
 	private static final long serialVersionUID = 1L;
 	User user = new User();
 	ArrayList<DbTable> mTables;
 
-	public addUserJFrame() {
+    public addUserJFrame() {
 		mTables = new ArrayList<DbTable>();
 		StorageManager storageManager = new StorageManager();
 
@@ -43,11 +41,19 @@ public class addUserJFrame extends javax.swing.JFrame {
 		initComponents();
 	}
 
-	public User getUser() {
+    /**
+     *
+     * @return user
+     */
+    public User getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+    /**
+     *
+     * @param user to be set
+     */
+    public void setUser(User user) {
 		this.user = user;
 	}
 
@@ -213,7 +219,7 @@ public class addUserJFrame extends javax.swing.JFrame {
 			PERMISSION permissions[] = new PERMISSION[perms.size()];
 
 			user.setPermissions(perms.toArray(permissions));
-			user.setAccess_tables(mTables);
+			//user.setAccess_tables(mTables);
 			setUser(user);
 			dispose();
 		} else {

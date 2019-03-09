@@ -10,57 +10,110 @@ import control.StorageManager;
 import control.Utils;
 import java.util.Objects;
 
+/**
+ * database configurations: host,port, service name, database full URL,
+ * username,password
+ *
+ * @author dotnet2
+ */
 public class DbConfigs {
 
     private String PORT_NUM;
     private String HOST;
     private String SERVICE_NAME;
+
     public String USER_NAME;
+
     public String PASSWORD;
+
     public String DB_URL;
+
     public String DB_DRIVER_URL;
+
     public ArrayList<DbTable> tables;
 
+    /**
+     * public constructor, set database driver URL as oracle driver
+     */
     public DbConfigs() {
         DB_DRIVER_URL = Messages.getString("DbConfigs.oracle_driver"); //$NON-NLS-1$
     }
 
+    /**
+     * return database tables
+     *
+     * @return
+     */
     public ArrayList<DbTable> getTables() {
         return tables;
     }
 
+    /**
+     * set database tables
+     *
+     * @param tables
+     */
     public void setTables(ArrayList<DbTable> tables) {
         this.tables = tables;
     }
 
+    /**
+     * set port number
+     *
+     * @param pORT_NUM
+     */
     public void setPORT_NUM(String pORT_NUM) {
         this.PORT_NUM = pORT_NUM;
     }
 
+    /**
+     * set host
+     *
+     * @param hOST
+     */
     public void setHOST(String hOST) {
         this.HOST = hOST;
     }
 
+    /**
+     * set service name
+     *
+     * @param sERVICE_NAME
+     */
     public void setSERVICE_NAME(String sERVICE_NAME) {
         this.SERVICE_NAME = sERVICE_NAME;
     }
 
+    /**
+     *
+     * @param uSER_NAME
+     */
     public void setUSER_NAME(String uSER_NAME) {
         this.USER_NAME = uSER_NAME;
     }
 
+    /**
+     * set password
+     *
+     * @param pASSWORD
+     */
     public void setPASSWORD(String pASSWORD) {
         this.PASSWORD = pASSWORD;
     }
 
-    /*
-	 * use port_num,host,service_name to build DB_URL
+    /**
+     * use port_num,host,service_name to build DB_URL
      */
     public void configDB_URL() {
 
         this.DB_URL = Messages.getString("DbConfigs.db_url_intro") + this.HOST + Messages.getString("DbConfigs.colon") + this.PORT_NUM + Messages.getString("DbConfigs.forward_slash") + this.SERVICE_NAME; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
     }
 
+    /**
+     * test database connection
+     *
+     * @return true if successfully connected, false if not
+     */
     public boolean testDbConnection() {
         boolean result = false;
         try {
@@ -80,8 +133,8 @@ public class DbConfigs {
         return result;
     }
 
-    /*
-	 * check if tables exist in storage are exactly what exist in db
+    /**
+     * check if tables exist in storage are exactly what exist in db
      */
     public void syncTables() {
         StorageManager storageManager = new StorageManager();
@@ -91,17 +144,21 @@ public class DbConfigs {
         SQLExecutor sqlExecutor = new SQLExecutor(sqlBuilder);
         ArrayList<String> table_names = sqlExecutor.getTables();
         table_names.forEach((table_name) -> {
-            boolean isExist = storageManager.checkifTableExist(table_name,dbmanager.DbManager.dbConfigs.getLabel());
+            boolean isExist = storageManager.checkifTableExist(table_name, dbmanager.DbManager.dbConfigs.getLabel());
             if (!isExist) {
                 sqlBuilder.buildDescribeTable(table_name);
                 DbTable dbTable = sqlExecutor.getDbTable(table_name);
                 if (dbTable != null) {
-                    storageManager.appendTable(dbTable,dbmanager.DbManager.dbConfigs.getLabel());
+                    storageManager.appendTable(dbTable, dbmanager.DbManager.dbConfigs.getLabel());
                 }
             }
         });
     }
 
+    /**
+     *
+     * @return database label ( username@service_name)
+     */
     public String getLabel() {
         return this.USER_NAME + "@" + DbConfigs.this.SERVICE_NAME;
     }

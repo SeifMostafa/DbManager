@@ -16,32 +16,37 @@ import model.User;
 import model.User.PERMISSION;
 
 /**
- *
+ * Creates new form LoginFrame to be login page
  * @author dotnet2
  */
 public class LoginPage extends javax.swing.JFrame {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
     boolean firstTime;
     boolean done = false;
 
     /**
-     * Creates new form LoginFrame
+     *  if login is successfully done
+     * @return true if logging on process is done
      */
     public boolean isDone() {
         return done;
     }
 
-    /*
-      * if login is successfully done
+
+    /**
+     *
+     * @param done to be set as done
      */
+
     public void setDone(boolean done) {
         this.done = done;
     }
 
+    /**
+     *
+     * @param isFirstTime to indicate if this is the first time this app is opened or not
+     */
     public LoginPage(boolean isFirstTime) {
         this.firstTime = isFirstTime;
         initComponents();

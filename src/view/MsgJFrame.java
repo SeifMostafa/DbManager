@@ -6,7 +6,7 @@
 package view;
 
 /**
- *
+ * small window to show message for users
  * @author dotnet2
  */
 public class MsgJFrame extends javax.swing.JFrame {
@@ -59,6 +59,12 @@ public class MsgJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+     /**
+     * set given
+     *
+     * @param msg in TextArea and refresh the window.
+     */
     public void setTextjTextArea(String msg){
         
         jTextArea1.setText(msg);

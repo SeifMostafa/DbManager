@@ -16,7 +16,8 @@ import model.User;
 import model.User.PERMISSION;
 
 /**
- *
+ * responsible for and read/write operations on cache or text files 
+ * do operate with hard disk 
  * @author dotnet2
  */
 public class StorageManager {

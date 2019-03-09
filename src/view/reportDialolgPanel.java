@@ -6,16 +6,15 @@
 package view;
 
 /**
+ * to show report about what is happened
  *
  * @author dotnet2
  */
 public class reportDialolgPanel extends javax.swing.JPanel {
 
+    private static final long serialVersionUID = 1L;
+
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	/**
      * Creates new form reportDialolgPanel
      */
     public reportDialolgPanel() {

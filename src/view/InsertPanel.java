@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import model.DbTable;
 
 /**
- *
+ * insert panel to show cols to take values from user to be inserts
  * @author dotnet2
  */
 public class InsertPanel extends javax.swing.JPanel {
@@ -30,14 +30,26 @@ public class InsertPanel extends javax.swing.JPanel {
     private ArrayList<colPanel> colPanels;
     private DbTable selectedTable;
 
+    /**
+     *
+     * @return colPanels
+     */
     public ArrayList<colPanel> getColPanels() {
         return colPanels;
     }
 
+    /**
+     *
+     * @return selected table
+     */
     public DbTable getSelectedTable() {
         return selectedTable;
     }
 
+    /**
+     * 
+     * @param selectedTable to set selected table
+     */
     public void setSelectedTable(DbTable selectedTable) {
         this.selectedTable = selectedTable;
     }
@@ -45,7 +57,7 @@ public class InsertPanel extends javax.swing.JPanel {
     /**
      * Creates new form insertPanel
      *
-     * @param tables
+     * @param tables to be shown as available tables
      */
     public InsertPanel(ArrayList<DbTable> tables) {
         this.mTables = tables;
@@ -147,6 +159,9 @@ public class InsertPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jComboBox_table_namesActionPerformed
+    /**
+     * depending on chosen table , draw cols
+     */
     private void colSetup() {
         colPanels = new ArrayList<>();
         jPanel_colsPanel.removeAll();
